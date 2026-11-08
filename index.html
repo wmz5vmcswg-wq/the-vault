@@ -1,0 +1,559 @@
+<!DOCTYPE html>
+<html lang="es" class="scroll-smooth">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>The Vault MX | Leather, Gold & Technology</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        vault: {
+                            black: '#0a0a0a',
+                            card: '#121212',
+                            border: '#262626',
+                            gold: '#d4af37',
+                            silver: '#e5e5e5',
+                            muted: '#737373',
+                            whatsapp: '#25D366'
+                        }
+                    },
+                    fontFamily: {
+                        serif: ['Cinzel', 'serif'],
+                        sans: ['Inter', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #0a0a0a;
+            color: #e5e5e5;
+            font-family: 'Inter', sans-serif;
+        }
+        .luxury-title {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.15em;
+        }
+        .bg-glass {
+            background: rgba(18, 18, 18, 0.85);
+            backdrop-filter: blur(12px);
+        }
+        /* Custom Scrollbar */
+        ::-webkit-scrollbar {
+            width: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: #0a0a0a;
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #262626;
+            border-radius: 3px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #d4af37;
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col justify-between selection:bg-vault-gold selection:text-black">
+
+    <!-- NAVBAR -->
+    <nav class="fixed top-0 left-0 w-full z-40 bg-glass border-b border-vault-border transition-all">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between items-center h-20">
+                <!-- Logo -->
+                <a href="#" class="flex flex-col">
+                    <span class="luxury-title text-2xl font-bold tracking-widest text-white">THE VAULT</span>
+                    <span class="text-[9px] tracking-[0.3em] text-vault-gold uppercase font-semibold">León · México</span>
+                </a>
+
+                <!-- Desktop Navigation -->
+                <div class="hidden md:flex items-center space-x-8 text-sm font-medium tracking-wider">
+                    <button onclick="filterCategory('all')" class="hover:text-vault-gold transition-colors">CATÁLOGO</button>
+                    <button onclick="filterCategory('leather')" class="hover:text-vault-gold transition-colors">LEATHER & BOOTS</button>
+                    <button onclick="filterCategory('gold')" class="hover:text-vault-gold transition-colors">THE GOLD</button>
+                    <button onclick="filterCategory('tech')" class="hover:text-vault-gold transition-colors">TECH & GADGETS</button>
+                    <a href="#garantias" class="hover:text-vault-gold transition-colors">GARANTÍAS</a>
+                </div>
+
+                <!-- Action Button: Cart Trigger -->
+                <div class="flex items-center space-x-4">
+                    <button onclick="toggleCartModal()" class="relative p-2.5 bg-neutral-900 border border-vault-border rounded-full hover:border-vault-gold transition-all duration-300">
+                        <i class="fa-solid fa-bag-shopping text-lg text-white"></i>
+                        <span id="cart-badge" class="absolute -top-1 -right-1 bg-vault-gold text-black text-[10px] font-bold w-5 h-5 rounded-full flex items-center justify-center hidden">0</span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- HERO SECTION -->
+    <header class="relative pt-32 pb-20 md:pt-44 md:pb-32 overflow-hidden border-b border-vault-border">
+        <div class="absolute inset-0 z-0 opacity-20 bg-[radial-gradient(#d4af37_1px,transparent_1px)] [background-size:24px_24px]"></div>
+        
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 text-center">
+            <span class="inline-block py-1 px-3 border border-vault-gold/40 text-vault-gold text-xs tracking-[0.25em] uppercase rounded-full mb-6 bg-vault-gold/5">
+                Curaduría Exclusiva desde León, Gto.
+            </span>
+            <h1 class="luxury-title text-4xl sm:text-6xl md:text-7xl font-bold text-white tracking-wide leading-tight mb-6">
+                EL VALOR DE LO AUTÉNTICO
+            </h1>
+            <p class="max-w-2xl mx-auto text-vault-muted text-base sm:text-lg mb-10 leading-relaxed font-light">
+                Selección de alta gama en <strong class="text-white font-medium">calzado de autor en piel</strong>, <strong class="text-white font-medium">joyería de oro ley</strong> y <strong class="text-white font-medium">tecnología de vanguardia</strong>. Despacho directo a todo México.
+            </p>
+            
+            <div class="flex flex-col sm:flex-row justify-center items-center gap-4">
+                <a href="#catalogo" class="w-full sm:w-auto px-8 py-4 bg-white text-black font-semibold text-xs tracking-[0.2em] uppercase rounded-none hover:bg-vault-gold transition-all duration-300 shadow-lg">
+                    Explorar Catálogo
+                </a>
+                <a href="https://wa.me/524776717098" target="_blank" class="w-full sm:w-auto px-8 py-4 border border-vault-border text-white font-semibold text-xs tracking-[0.2em] uppercase rounded-none hover:border-vault-gold hover:text-vault-gold transition-all duration-300 flex items-center justify-center gap-2">
+                    <i class="fa-brands fa-whatsapp text-lg"></i> Atención Directa
+                </a>
+            </div>
+        </div>
+    </header>
+
+    <!-- MAIN CONTENT -->
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16 flex-grow">
+
+        <!-- CATALOG SECTION -->
+        <section id="catalogo" class="mb-24">
+            <div class="flex flex-col md:flex-row md:items-end justify-between mb-12 border-b border-vault-border pb-6">
+                <div>
+                    <h2 class="luxury-title text-2xl sm:text-3xl text-white font-semibold tracking-wider mb-2">CATÁLOGO EXCLUSIVO</h2>
+                    <p class="text-vault-muted text-sm">Gestionamos y resurtimos tu pedido directamente con nuestros aliados estratégicos.</p>
+                </div>
+
+                <!-- Category Filters -->
+                <div class="flex flex-wrap gap-2 mt-6 md:mt-0">
+                    <button onclick="filterCategory('all')" id="btn-cat-all" class="cat-btn active px-4 py-2 border border-vault-gold text-vault-gold text-xs font-semibold tracking-widest uppercase transition-all">TODOS</button>
+                    <button onclick="filterCategory('leather')" id="btn-cat-leather" class="cat-btn px-4 py-2 border border-vault-border text-vault-muted hover:text-white text-xs font-semibold tracking-widest uppercase transition-all">LEATHER & BOOTS</button>
+                    <button onclick="filterCategory('gold')" id="btn-cat-gold" class="cat-btn px-4 py-2 border border-vault-border text-vault-muted hover:text-white text-xs font-semibold tracking-widest uppercase transition-all">THE GOLD</button>
+                    <button onclick="filterCategory('tech')" id="btn-cat-tech" class="cat-btn px-4 py-2 border border-vault-border text-vault-muted hover:text-white text-xs font-semibold tracking-widest uppercase transition-all">TECH & GADGETS</button>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Rendered dynamically by JS -->
+            </div>
+        </section>
+
+        <!-- GUARANTEES & SPEI INFO -->
+        <section id="garantias" class="pt-12 border-t border-vault-border">
+            <div class="text-center mb-16">
+                <h2 class="luxury-title text-2xl sm:text-3xl text-white font-semibold tracking-wider mb-3">COMPRA DIRECTA Y GARANTIZADA</h2>
+                <p class="text-vault-muted text-sm max-w-xl mx-auto">Trato directo sin intermediarios ni pasarelas costosas. El 100% de nuestras operaciones se coordinan de forma segura.</p>
+            </div>
+
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <!-- Feature 1 -->
+                <div class="p-8 bg-vault-card border border-vault-border rounded-none text-left relative overflow-hidden group hover:border-vault-gold/50 transition-all">
+                    <div class="w-12 h-12 bg-neutral-900 border border-vault-border flex items-center justify-center text-vault-gold text-xl mb-6 group-hover:border-vault-gold transition-colors">
+                        <i class="fa-solid fa-shield-halved"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2 tracking-wide">Autenticidad de Origen</h3>
+                    <p class="text-vault-muted text-sm leading-relaxed">
+                        Pieles finas y botas manufacturadas en León por <strong class="text-white">Reyno Boots</strong>, joyería de oro certificado ley por <strong class="text-white">The Gold Street</strong> y tecnología original garantizada con <strong class="text-white">Impeweb</strong>.
+                    </p>
+                </div>
+
+                <!-- Feature 2 -->
+                <div class="p-8 bg-vault-card border border-vault-border rounded-none text-left relative overflow-hidden group hover:border-vault-gold/50 transition-all">
+                    <div class="w-12 h-12 bg-neutral-900 border border-vault-border flex items-center justify-center text-vault-gold text-xl mb-6 group-hover:border-vault-gold transition-colors">
+                        <i class="fa-solid fa-money-bill-transfer"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2 tracking-wide">Pago por Transferencia SPEI</h3>
+                    <p class="text-vault-muted text-sm leading-relaxed">
+                        Sin comisiones sorpresa. Coordinamos tu pedido por WhatsApp y te enviamos la CLABE Interbancaria para transferir directamente antes del despacho.
+                    </p>
+                </div>
+
+                <!-- Feature 3 -->
+                <div class="p-8 bg-vault-card border border-vault-border rounded-none text-left relative overflow-hidden group hover:border-vault-gold/50 transition-all">
+                    <div class="w-12 h-12 bg-neutral-900 border border-vault-border flex items-center justify-center text-vault-gold text-xl mb-6 group-hover:border-vault-gold transition-colors">
+                        <i class="fa-solid fa-truck-fast"></i>
+                    </div>
+                    <h3 class="text-lg font-semibold text-white mb-2 tracking-wide">Envíos a todo México</h3>
+                    <p class="text-vault-muted text-sm leading-relaxed">
+                        Gestión express de envío desde León, Guanajuato hacia cualquier estado de la República Mexicana con guía de rastreo (FedEx, DHL, Estafeta).
+                    </p>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- FOOTER -->
+    <footer class="bg-black border-t border-vault-border py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex flex-col md:flex-row justify-between items-center gap-6">
+            <div class="text-center md:text-left">
+                <span class="luxury-title text-xl font-bold text-white tracking-widest">THE VAULT</span>
+                <p class="text-xs text-vault-muted mt-1">León, Guanajuato, México · WhatsApp direct: +52 477 671 7098</p>
+            </div>
+            
+            <div class="flex items-center space-x-6 text-sm text-vault-muted">
+                <a href="#catalogo" class="hover:text-white transition-colors">Catálogo</a>
+                <a href="#garantias" class="hover:text-white transition-colors">Envíos & SPEI</a>
+                <a href="https://wa.me/524776717098" target="_blank" class="text-vault-whatsapp hover:underline flex items-center gap-1.5 font-medium">
+                    <i class="fa-brands fa-whatsapp"></i> WhatsApp
+                </a>
+            </div>
+
+            <div class="text-xs text-vault-muted">
+                &copy; 2026 The Vault MX. Todos los derechos reservados.
+            </div>
+        </div>
+    </footer>
+
+    <!-- CART MODAL -->
+    <div id="cart-modal" class="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex justify-end opacity-0 pointer-events-none transition-opacity duration-300">
+        <div class="w-full max-w-md bg-vault-card border-l border-vault-border h-full flex flex-col justify-between p-6 overflow-y-auto">
+            
+            <!-- Header -->
+            <div>
+                <div class="flex justify-between items-center pb-6 border-b border-vault-border mb-6">
+                    <div class="flex items-center gap-2">
+                        <i class="fa-solid fa-bag-shopping text-vault-gold"></i>
+                        <h3 class="luxury-title text-lg font-semibold text-white tracking-wider">MI PEDIDO</h3>
+                    </div>
+                    <button onclick="toggleCartModal()" class="text-vault-muted hover:text-white p-2">
+                        <i class="fa-solid fa-xmark text-xl"></i>
+                    </button>
+                </div>
+
+                <!-- Items List -->
+                <div id="cart-items" class="space-y-4 mb-6">
+                    <!-- Dynamic Cart Items -->
+                </div>
+            </div>
+
+            <!-- Footer / Checkout Form -->
+            <div class="border-t border-vault-border pt-6 mt-auto">
+                <div class="flex justify-between items-center text-lg font-semibold mb-6">
+                    <span class="text-vault-muted">Total Estimado:</span>
+                    <span id="cart-total" class="text-vault-gold">$0 MXN</span>
+                </div>
+
+                <!-- Order Form -->
+                <form id="checkout-form" onsubmit="sendWhatsAppOrder(event)" class="space-y-4 mb-4">
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-vault-muted mb-1">Nombre Completo *</label>
+                        <input type="text" id="customer-name" required placeholder="Ej. Carlos Mendoza" class="w-full bg-neutral-900 border border-vault-border rounded-none py-2.5 px-3 text-sm text-white focus:outline-none focus:border-vault-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-vault-muted mb-1">Dirección y Colonia *</label>
+                        <input type="text" id="customer-address" required placeholder="Ej. Av. Universidad 123, Col. Centro" class="w-full bg-neutral-900 border border-vault-border rounded-none py-2.5 px-3 text-sm text-white focus:outline-none focus:border-vault-gold">
+                    </div>
+                    <div>
+                        <label class="block text-xs uppercase font-semibold text-vault-muted mb-1">Ciudad y Estado *</label>
+                        <input type="text" id="customer-city" required placeholder="Ej. Guadalajara, Jalisco" class="w-full bg-neutral-900 border border-vault-border rounded-none py-2.5 px-3 text-sm text-white focus:outline-none focus:border-vault-gold">
+                    </div>
+
+                    <button type="submit" class="w-full py-4 bg-vault-whatsapp text-black font-bold text-xs tracking-[0.2em] uppercase rounded-none hover:bg-emerald-400 transition-all duration-300 flex items-center justify-center gap-2 mt-4 shadow-lg">
+                        <i class="fa-brands fa-whatsapp text-lg"></i> Confirmar Pedido por WhatsApp
+                    </button>
+                </form>
+
+                <p class="text-[11px] text-center text-vault-muted">
+                    <i class="fa-solid fa-lock text-vault-gold/70 mr-1"></i> Se abrirá WhatsApp para enviar tu orden y recibir los datos de pago por transferencia bancaria (SPEI).
+                </p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT APP LOGIC -->
+    <script>
+        // Catalog Database
+        const products = [
+            {
+                id: 'l1',
+                title: 'Bota Exótica Cuero Pitón Original',
+                category: 'leather',
+                partner: 'Reyno Boots',
+                spec: 'Tallas: 25.5 a 30 MX',
+                price: 4200,
+                image: 'https://images.unsplash.com/photo-1543163521-1bf539c55dd2?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 'l2',
+                title: 'Bota Rodeo Piel Vacuno Premium',
+                category: 'leather',
+                partner: 'Reyno Boots',
+                spec: 'Tallas: 25 a 30.5 MX',
+                price: 2890,
+                image: 'https://images.unsplash.com/photo-1608256246200-53e635b5b65f?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 'g1',
+                title: 'Cadena Tejido Chino Oro 14K (12g)',
+                category: 'gold',
+                partner: 'The Gold Street',
+                spec: 'Oro Ley Macizo / 55cm',
+                price: 18500,
+                image: 'https://images.unsplash.com/photo-1599643478518-a784e5dc4c8f?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 'g2',
+                title: 'Anillo Sello Real Oro 10K',
+                category: 'gold',
+                partner: 'The Gold Street',
+                spec: 'Gemas Integradas / Grabado',
+                price: 9400,
+                image: 'https://images.unsplash.com/photo-1605100804763-247f67b3557e?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 't1',
+                title: 'Audífonos Pro Noise Cancelling',
+                category: 'tech',
+                partner: 'Impeweb',
+                spec: 'Bluetooth 5.3 / Batería 36h',
+                price: 3450,
+                image: 'https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=600&q=80'
+            },
+            {
+                id: 't2',
+                title: 'Smartwatch Luxury Titanium Edition',
+                category: 'tech',
+                partner: 'Impeweb',
+                spec: 'Monitoreo Salud & GPS',
+                price: 4990,
+                image: 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=600&q=80'
+            }
+        ];
+
+        // State Management
+        let cart = [];
+        let activeCategory = 'all';
+
+        // Initialize App
+        window.onload = function () {
+            renderProducts();
+            updateCartUI();
+        };
+
+        // Render Products Grid
+        function renderProducts() {
+            const grid = document.getElementById('products-grid');
+            grid.innerHTML = '';
+
+            const filtered = activeCategory === 'all' 
+                ? products 
+                : products.filter(p => p.category === activeCategory);
+
+            filtered.forEach(product => {
+                const card = document.createElement('div');
+                card.className = 'bg-vault-card border border-vault-border rounded-none overflow-hidden group hover:border-vault-gold/40 transition-all duration-300 flex flex-col justify-between';
+                
+                card.innerHTML = `
+                    <div>
+                        <div class="relative h-64 overflow-hidden bg-neutral-900">
+                            <img src="${product.image}" alt="${product.title}" class="w-full h-full object-cover object-center group-hover:scale-105 transition-transform duration-500 opacity-90 group-hover:opacity-100">
+                            <span class="absolute top-3 left-3 bg-black/90 text-vault-gold text-[10px] font-semibold tracking-wider px-2.5 py-1 uppercase border border-vault-gold/30">
+                                ${product.partner}
+                            </span>
+                        </div>
+                        <div class="p-6">
+                            <span class="text-xs text-vault-muted uppercase tracking-widest block mb-1">${getCategoryLabel(product.category)}</span>
+                            <h3 class="text-base font-semibold text-white tracking-wide mb-2">${product.title}</h3>
+                            <p class="text-xs text-vault-muted mb-4">${product.spec}</p>
+                        </div>
+                    </div>
+                    <div class="px-6 pb-6 pt-0 flex items-center justify-between border-t border-vault-border/50 pt-4">
+                        <div>
+                            <span class="text-[10px] text-vault-muted block uppercase tracking-wider">Precio MXN</span>
+                            <span class="text-lg font-bold text-white">$${product.price.toLocaleString('es-MX')}</span>
+                        </div>
+                        <button onclick="addToCart('${product.id}')" class="px-4 py-2.5 bg-neutral-900 border border-vault-border text-white text-xs font-semibold tracking-wider hover:bg-vault-gold hover:text-black hover:border-vault-gold transition-all duration-300 flex items-center gap-2">
+                            <i class="fa-solid fa-plus text-xs"></i> Agregar
+                        </button>
+                    </div>
+                `;
+                grid.appendChild(card);
+            });
+        }
+
+        function getCategoryLabel(cat) {
+            switch(cat) {
+                case 'leather': return 'Leather & Boots';
+                case 'gold': return 'The Gold';
+                case 'tech': return 'Tech & Gadgets';
+                default: return '';
+            }
+        }
+
+        // Category Filter Function
+        function filterCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.classList.remove('border-vault-gold', 'text-vault-gold');
+                btn.classList.add('border-vault-border', 'text-vault-muted');
+            });
+
+            const activeBtn = document.getElementById(`btn-cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.classList.remove('border-vault-border', 'text-vault-muted');
+                activeBtn.classList.add('border-vault-gold', 'text-vault-gold');
+            }
+
+            renderProducts();
+        }
+
+        // Cart Actions
+        function addToCart(productId) {
+            const product = products.find(p => p.id === productId);
+            const existing = cart.find(item => item.id === productId);
+
+            if (existing) {
+                existing.quantity += 1;
+            } else {
+                cart.push({ ...product, quantity: 1 });
+            }
+
+            updateCartUI();
+            toggleCartModal(true); // Open modal to show added item
+        }
+
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartUI();
+        }
+
+        function changeQuantity(productId, delta) {
+            const item = cart.find(i => i.id === productId);
+            if (item) {
+                item.quantity += delta;
+                if (item.quantity <= 0) {
+                    removeFromCart(productId);
+                } else {
+                    updateCartUI();
+                }
+            }
+        }
+
+        function updateCartUI() {
+            const itemsContainer = document.getElementById('cart-items');
+            const cartBadge = document.getElementById('cart-badge');
+            const cartTotal = document.getElementById('cart-total');
+
+            // Count total items
+            const totalCount = cart.reduce((sum, item) => sum + item.quantity, 0);
+            
+            if (totalCount > 0) {
+                cartBadge.innerText = totalCount;
+                cartBadge.classList.remove('hidden');
+            } else {
+                cartBadge.classList.add('hidden');
+            }
+
+            // Render Items
+            itemsContainer.innerHTML = '';
+            let total = 0;
+
+            if (cart.length === 0) {
+                itemsContainer.innerHTML = `
+                    <div class="text-center py-12 text-vault-muted">
+                        <i class="fa-solid fa-bag-shopping text-3xl mb-3 block opacity-40"></i>
+                        <p class="text-sm">Tu carrito está vacío</p>
+                    </div>
+                `;
+            } else {
+                cart.forEach(item => {
+                    const subtotal = item.price * item.quantity;
+                    total += subtotal;
+
+                    const itemEl = document.createElement('div');
+                    itemEl.className = 'flex items-center justify-between p-3 bg-neutral-900 border border-vault-border';
+                    itemEl.innerHTML = `
+                        <div class="flex items-center gap-3">
+                            <img src="${item.image}" alt="${item.title}" class="w-12 h-12 object-cover border border-vault-border">
+                            <div>
+                                <h4 class="text-xs font-semibold text-white leading-tight">${item.title}</h4>
+                                <span class="text-[10px] text-vault-muted block">$${item.price.toLocaleString('es-MX')} MXN c/u</span>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-3">
+                            <div class="flex items-center border border-vault-border bg-black">
+                                <button onclick="changeQuantity('${item.id}', -1)" class="px-2 py-0.5 text-xs text-vault-muted hover:text-white">-</button>
+                                <span class="px-2 text-xs font-semibold text-white">${item.quantity}</span>
+                                <button onclick="changeQuantity('${item.id}', 1)" class="px-2 py-0.5 text-xs text-vault-muted hover:text-white">+</button>
+                            </div>
+                            <button onclick="removeFromCart('${item.id}')" class="text-vault-muted hover:text-red-400 text-xs">
+                                <i class="fa-solid fa-trash-can"></i>
+                            </button>
+                        </div>
+                    `;
+                    itemsContainer.appendChild(itemEl);
+                });
+            }
+
+            cartTotal.innerText = `$${total.toLocaleString('es-MX')} MXN`;
+        }
+
+        // Toggle Modal
+        function toggleCartModal(forceOpen = false) {
+            const modal = document.getElementById('cart-modal');
+            if (forceOpen || modal.classList.contains('opacity-0')) {
+                modal.classList.remove('opacity-0', 'pointer-events-none');
+            } else {
+                modal.classList.add('opacity-0', 'pointer-events-none');
+            }
+        }
+
+        // Generate Structured WhatsApp Message
+        function sendWhatsAppOrder(e) {
+            e.preventDefault();
+
+            if (cart.length === 0) {
+                alert('Tu carrito está vacío. Agrega al menos un producto.');
+                return;
+            }
+
+            const name = document.getElementById('customer-name').value.trim();
+            const address = document.getElementById('customer-address').value.trim();
+            const city = document.getElementById('customer-city').value.trim();
+
+            const phone = "524776717098"; // WhatsApp Business target
+
+            // Construct Order Text
+            let message = `*¡Hola! Quiero solicitar un nuevo pedido en THE VAULT MX*\n\n`;
+            message += `*DATOS DEL CLIENTE:*\n`;
+            message += `• *Nombre:* ${name}\n`;
+            message += `• *Dirección:* ${address}\n`;
+            message += `• *Ciudad/Estado:* ${city}\n\n`;
+            
+            message += `*DETALLE DEL PEDIDO:*\n`;
+            
+            let total = 0;
+            cart.forEach((item, index) => {
+                const subtotal = item.price * item.quantity;
+                total += subtotal;
+                message += `${index + 1}. *${item.title}* (${item.partner})\n`;
+                message += `   Especificación: ${item.spec}\n`;
+                message += `   Cantidad: ${item.quantity} x $${item.price.toLocaleString('es-MX')} = $${subtotal.toLocaleString('es-MX')} MXN\n\n`;
+            });
+
+            message += `*TOTAL ESTIMADO:* $${total.toLocaleString('es-MX')} MXN\n\n`;
+            message += `Quedo a la espera de la confirmación de stock y los datos de la cuenta CLABE para realizar la *transferencia bancaria (SPEI)*.`;
+
+            // Encode text for URL
+            const encodedText = encodeURIComponent(message);
+            const waUrl = `https://wa.me/${phone}?text=${encodedText}`;
+
+            // Open WhatsApp in a new tab
+            window.open(waUrl, '_blank');
+        }
+    </script>
+</body>
+</html>
