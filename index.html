@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VAULT MX — Curaduría & Colección Privada</title>
+    <title>THE VAULT MX — Catálogo General & Curaduría</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
@@ -34,8 +34,8 @@
     <style>
         body { background-color: #050507; color: #e5e5e7; }
         .vault-glass { background: rgba(20, 20, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(197, 168, 128, 0.15); }
-        .vault-card { background: #14141a; border: 1px solid #262630; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
-        .vault-card:hover { border-color: rgba(197, 168, 128, 0.4); transform: translateY(-3px); box-shadow: 0 12px 40px -10px rgba(0,0,0,0.7); }
+        .vault-card { background: #14141a; border: 1px solid #262630; transition: all 0.3s ease; }
+        .vault-card:hover { border-color: rgba(197, 168, 128, 0.4); transform: translateY(-2px); }
         .gold-gradient-text { background: linear-gradient(135deg, #e2d3bc 0%, #c5a880 50%, #9a7e58 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
@@ -43,18 +43,18 @@
 
     <!-- HEADER / NAVEGACIÓN -->
     <header class="sticky top-0 z-40 vault-glass border-b border-vault-border">
-        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
-            <div class="flex items-center gap-4">
-                <div class="w-11 h-11 rounded-none border border-vault-gold/40 bg-vault-surface flex items-center justify-center font-serif font-bold text-vault-gold text-xl tracking-widest shadow-2xl">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-20 sm:h-24 flex items-center justify-between">
+            <div class="flex items-center gap-3 sm:gap-4">
+                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-none border border-vault-gold/40 bg-vault-surface flex items-center justify-center font-serif font-bold text-vault-gold text-lg sm:text-xl tracking-widest shadow-2xl">
                     V
                 </div>
                 <div>
-                    <span class="text-xl font-serif font-bold tracking-[0.25em] text-white block">THE VAULT</span>
-                    <span class="text-[9px] tracking-[0.3em] text-vault-gold uppercase font-medium">Curaduría General • León, Gto.</span>
+                    <span class="text-base sm:text-xl font-serif font-bold tracking-[0.2em] text-white block">THE VAULT</span>
+                    <span class="text-[8px] sm:text-[9px] tracking-[0.25em] text-vault-gold uppercase font-medium">León, Gto. • México</span>
                 </div>
             </div>
 
-            <button onclick="toggleCart()" class="relative p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2">
+            <button onclick="toggleCart()" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2">
                 <svg class="w-5 h-5 text-vault-gold group-hover:scale-105 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                 <span class="hidden sm:inline text-xs font-serif uppercase tracking-wider text-gray-300">Mochila</span>
                 <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
@@ -63,29 +63,29 @@
     </header>
 
     <!-- CONTENIDO PRINCIPAL -->
-    <main class="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex-1 w-full">
+    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 flex-1 w-full">
         
-        <!-- HERO GENERAL -->
-        <div class="text-center max-w-3xl mx-auto mb-16">
-            <span class="inline-block text-[10px] uppercase tracking-[0.4em] text-vault-gold mb-4 border-b border-vault-gold/30 pb-1">
+        <!-- HERO -->
+        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
+            <span class="inline-block text-[10px] uppercase tracking-[0.35em] text-vault-gold mb-3 sm:mb-4 border-b border-vault-gold/30 pb-1">
                 Catálogo General, Ediciones Especiales & Rebajas
             </span>
-            <h1 class="text-3xl sm:text-6xl font-serif font-light tracking-tight text-white mb-6 leading-tight">
-                Piezas Exclusivas, <span class="gold-gradient-text font-normal">Comunes & Rebajas</span>
+            <h1 class="text-2xl sm:text-5xl lg:text-6xl font-serif font-light tracking-tight text-white mb-4 sm:mb-6 leading-tight">
+                Artículos Exclusivos, <span class="gold-gradient-text font-normal">Comunes & Rebajas</span>
             </h1>
-            <p class="text-gray-400 text-xs sm:text-sm font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
-                Explora nuestra selección completa de artículos de autor, piezas cotidianas de alta calidad y oportunidades en liquidación directa.
+            <p class="text-gray-400 text-xs sm:text-sm font-light tracking-wide max-w-2xl mx-auto leading-relaxed px-2">
+                Explora nuestra selección completa de artículos de autor, piezas cotidianas y oportunidades en liquidación directa.
             </p>
         </div>
 
         <!-- FILTROS Y BÚSQUEDA -->
-        <div class="flex flex-col lg:flex-row gap-6 mb-12 justify-between items-center border-y border-vault-border py-6">
-            <div class="flex flex-wrap gap-2.5 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0" id="category-tabs">
-                <button onclick="setCategory('all', this)" class="cat-btn active px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all">Todos</button>
-                <button onclick="setCategory('clearance', this)" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all">🔥 Liquidación</button>
-                <button onclick="setCategory('leather', this)" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Piel & Botas</button>
-                <button onclick="setCategory('gold', this)" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Oro Original</button>
-                <button onclick="setCategory('tech', this)" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Tech & Gadgets</button>
+        <div class="flex flex-col lg:flex-row gap-4 sm:gap-6 mb-10 sm:mb-12 justify-between items-center border-y border-vault-border py-4 sm:py-6">
+            <div class="flex flex-wrap gap-2 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0 justify-center sm:justify-start" id="category-tabs">
+                <button type="button" onclick="setCategory('all', this)" class="cat-btn active px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all">Todos</button>
+                <button type="button" onclick="setCategory('clearance', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all">🔥 Liquidación</button>
+                <button type="button" onclick="setCategory('leather', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Piel & Botas</button>
+                <button type="button" onclick="setCategory('gold', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Oro Original</button>
+                <button type="button" onclick="setCategory('tech', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Tech & Gadgets</button>
             </div>
 
             <div class="w-full lg:w-72">
@@ -94,12 +94,12 @@
         </div>
 
         <!-- REJILLA DE PRODUCTOS -->
-        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
             <div class="col-span-full py-24 text-center text-gray-600 font-serif tracking-widest text-sm">Cargando catálogo...</div>
         </div>
 
-        <!-- SECCIÓN DE GARANTÍAS Y CONFIANZA -->
-        <section class="mt-28 pt-16 border-t border-vault-border grid grid-cols-1 md:grid-cols-3 gap-8 text-center">
+        <!-- GARANTÍAS Y CONFIANZA -->
+        <section class="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-vault-border grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
             <div class="p-6 bg-vault-card border border-vault-border">
                 <div class="text-vault-gold text-2xl mb-3 font-serif">◈</div>
                 <h3 class="text-sm font-serif uppercase tracking-widest text-white mb-2">Autenticidad Garantizada</h3>
@@ -117,13 +117,13 @@
             </div>
         </section>
 
-        <!-- RESEÑAS DE CLIENTES SATISFECHOS -->
-        <section class="mt-20 pt-16 border-t border-vault-border">
-            <div class="text-center mb-12">
+        <!-- RESEÑAS DE CLIENTES -->
+        <section class="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-vault-border">
+            <div class="text-center mb-10 sm:mb-12">
                 <span class="text-[10px] uppercase tracking-[0.3em] text-vault-gold">Testimonios</span>
                 <h2 class="text-2xl font-serif text-white mt-2">Lo que dicen nuestros clientes</h2>
             </div>
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
                 <div class="bg-vault-card p-6 border border-vault-border relative">
                     <p class="text-xs text-gray-300 italic mb-4 font-light">"Pedí un par de botas y la calidad superó por completo mis expectativas. La atención por WhatsApp fue muy rápida y clara."</p>
                     <span class="text-[11px] font-serif font-bold text-vault-gold block">— Alejandro M., Guadalajara</span>
@@ -141,7 +141,7 @@
     </main>
 
     <!-- FOOTER -->
-    <footer class="bg-vault-surface border-t border-vault-border py-12 mt-20 text-center text-xs text-gray-500">
+    <footer class="bg-vault-surface border-t border-vault-border py-10 sm:py-12 mt-16 sm:mt-20 text-center text-xs text-gray-500 px-4">
         <p class="font-serif tracking-widest text-vault-gold mb-2">THE VAULT MX</p>
         <p>Operaciones y logística desde León, Guanajuato. Contacto directo: +52 477 671 7098</p>
     </footer>
@@ -152,19 +152,19 @@
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
             <div class="w-screen max-w-md bg-vault-base border-l border-vault-border shadow-2xl flex flex-col justify-between">
                 
-                <div class="p-8 border-b border-vault-border flex items-center justify-between">
+                <div class="p-6 sm:p-8 border-b border-vault-border flex items-center justify-between">
                     <div>
-                        <h2 class="text-lg font-serif tracking-widest text-white uppercase">Tu Mochila</h2>
+                        <h2 class="text-base sm:text-lg font-serif tracking-widest text-white uppercase">Tu Mochila</h2>
                         <span id="cart-count" class="text-[10px] text-vault-gold tracking-widest uppercase">0 piezas seleccionadas</span>
                     </div>
-                    <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors text-lg">✕</button>
+                    <button type="button" onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors text-lg p-2">✕</button>
                 </div>
 
-                <div id="cart-items" class="p-8 space-y-4 overflow-y-auto flex-1">
+                <div id="cart-items" class="p-6 sm:p-8 space-y-4 overflow-y-auto flex-1">
                     <p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La mochila está vacía.</p>
                 </div>
 
-                <div class="p-8 border-t border-vault-border bg-vault-surface space-y-5">
+                <div class="p-6 sm:p-8 border-t border-vault-border bg-vault-surface space-y-4 sm:space-y-5">
                     <div class="space-y-3">
                         <input type="text" id="cust-name" placeholder="Tu Nombre Completo" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
                         <input type="text" id="cust-city" placeholder="Ciudad y Estado de envío" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
@@ -176,7 +176,7 @@
                         <span id="cart-total" class="text-lg font-serif font-bold text-vault-gold">$0 MXN</span>
                     </div>
 
-                    <button onclick="sendWhatsAppOrder()" class="w-full py-4 bg-vault-gold hover:bg-vault-goldlight text-black font-semibold text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-2">
+                    <button type="button" onclick="sendWhatsAppOrder()" class="w-full py-4 bg-vault-gold hover:bg-vault-goldlight text-black font-semibold text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-2">
                         <span>Enviar Pedido a WhatsApp</span>
                         <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     </button>
@@ -187,7 +187,7 @@
         </div>
     </div>
 
-    <!-- LÓGICA DE JAVASCRIPT CORREGIDA -->
+    <!-- LÓGICA DE JAVASCRIPT ROBUSTA Y SEGURA -->
     <script>
         const SHEET_ID = '1Tg0odp3rYCWwNMYdNB19IJupL3NQBvO1jzsN9ZVbm9o';
         const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
@@ -210,19 +210,37 @@
                 for (let i = 1; i < rows.length; i++) {
                     const r = rows[i];
                     if (r && r[0] && r[0] !== '') {
+                        let rawCat = r[1] ? r[1].toLowerCase().trim() : '';
+                        let provider = r[2] ? r[2].toLowerCase().trim() : '';
                         let imgUrl = r[7] ? r[7].trim() : '';
                         let hasValidImage = imgUrl.startsWith('http');
+                        let condition = r[8] ? r[8].trim() : 'Nuevo';
+
+                        // Segmentación inteligente basada en texto de Google Sheets
+                        let mappedCategory = 'leather';
+                        let combinedText = rawCat + ' ' + provider;
+
+                        if (combinedText.includes('oro') || combinedText.includes('gold') || combinedText.includes('joya')) {
+                            mappedCategory = 'gold';
+                        } else if (combinedText.includes('tech') || combinedText.includes('gadget') || combinedText.includes('electronica')) {
+                            mappedCategory = 'tech';
+                        } else if (combinedText.includes('bota') || combinedText.includes('piel') || combinedText.includes('reyno') || combinedText.includes('leather')) {
+                            mappedCategory = 'leather';
+                        } else {
+                            mappedCategory = rawCat || 'leather';
+                        }
 
                         products.push({
                             id: `p-${i}`,
                             title: r[0] || 'Artículo sin título',
-                            category: (r[1] || 'leather').toLowerCase().trim(),
+                            category: mappedCategory,
                             partner: r[2] || 'The Vault',
                             spec: r[3] || '',
                             priceNormal: Number(r[4]) || 0,
                             priceDiscount: Number(r[5]) || 0,
                             isClearance: (r[6] || '').toLowerCase().trim() === 'si',
-                            image: hasValidImage ? imgUrl : null
+                            image: hasValidImage ? imgUrl : null,
+                            condition: condition
                         });
                     }
                 }
@@ -243,7 +261,7 @@
             const search = searchInput ? searchInput.value.toLowerCase() : '';
 
             const filtered = products.filter(p => {
-                const matchesSearch = p.title.toLowerCase().includes(search) || p.partner.toLowerCase().includes(search);
+                const matchesSearch = p.title.toLowerCase().includes(search) || p.partner.toLowerCase().includes(search) || p.spec.toLowerCase().includes(search);
                 if (currentCategory === 'all') return matchesSearch;
                 if (currentCategory === 'clearance') return matchesSearch && p.isClearance;
                 return matchesSearch && p.category === currentCategory;
@@ -280,6 +298,9 @@
                             <span class="px-3 py-1 bg-black/90 backdrop-blur-md border border-vault-gold/30 text-vault-gold text-[9px] font-serif tracking-[0.2em] uppercase">
                                 ${p.partner}
                             </span>
+                            <span class="px-2.5 py-1 bg-vault-surface/90 border border-vault-border text-gray-300 text-[9px] font-mono tracking-wider uppercase">
+                                ${p.condition}
+                            </span>
                             ${p.isClearance ? `<span class="px-3 py-1 bg-vault-sale text-white text-[9px] font-bold tracking-[0.2em] uppercase shadow-lg">🔥 Liquidación</span>` : ''}
                         </div>
 
@@ -299,7 +320,7 @@
                                     $${finalPrice.toLocaleString()} MXN
                                 </span>
                             </div>
-                            <button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all">
+                            <button type="button" onclick="addToCart('${p.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all cursor-pointer">
                                 Adquirir
                             </button>
                         </div>
@@ -369,13 +390,13 @@
                 return `
                 <div class="flex items-center justify-between bg-vault-base p-4 border border-vault-border">
                     <div class="flex-1 pr-3">
-                        <h4 class="text-xs font-serif tracking-wider text-white">${item.title}</h4>
-                        <span class="text-[11px] text-vault-gold font-mono">$${price.toLocaleString()} MXN</span>
+                        <h4 class="text-xs font-serif tracking-wider text-white">${item.title} <span class="text-[10px] text-vault-gold">(${item.condition})</span></h4>
+                        <span class="text-[11px] text-vault-gold font-mono">$${price.toLocaleString()} MXN (Sub: $${subtotal.toLocaleString()})</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">−</button>
+                        <button type="button" onclick="changeQty('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">−</button>
                         <span class="text-xs font-mono font-bold text-white">${item.qty}</span>
-                        <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">+</button>
+                        <button type="button" onclick="changeQty('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">+</button>
                     </div>
                 </div>`;
             }).join('');
@@ -417,8 +438,9 @@
             let total = 0;
             let itemsText = cart.map(i => {
                 const price = (i.priceDiscount > 0 && i.priceDiscount < i.priceNormal) ? i.priceDiscount : i.priceNormal;
-                total += price * i.qty;
-                return `• ${i.qty}x ${i.title} (${i.partner}) — $${(price * i.qty).toLocaleString()} MXN`;
+                const itemSubtotal = price * i.qty;
+                total += itemSubtotal;
+                return `• ${i.qty}x ${i.title} [Condición: ${i.condition}] (${i.partner}) — $${price.toLocaleString()} c/u (Subtotal: $${itemSubtotal.toLocaleString()} MXN)`;
             }).join('\n');
 
             let msg = `*SOLICITUD DE PEDIDO — THE VAULT MX*\n\n` +
