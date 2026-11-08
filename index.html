@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="toggleCart()" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="toggleCart(true)" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2 cursor-pointer">
                 <svg class="w-5 h-5 text-vault-gold group-hover:scale-105 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                 <span class="hidden sm:inline text-xs font-serif uppercase tracking-wider text-gray-300">Mochila</span>
                 <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
@@ -78,7 +78,7 @@
             </p>
         </div>
 
-        <!-- FILTROS (SIN BARRA DE BÚSQUEDA) -->
+        <!-- FILTROS DE CATEGORÍA -->
         <div class="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-12 justify-center items-center border-y border-vault-border py-4 sm:py-6">
             <div class="flex flex-wrap gap-2.5 justify-center" id="category-tabs">
                 <button type="button" onclick="setCategory('all', this)" class="cat-btn active px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all cursor-pointer">Todos</button>
@@ -142,9 +142,9 @@
         <p>Operaciones y logística desde León, Guanajuato. Asesor encargado: Saúl Falcón • Contacto: +52 477 671 7098</p>
     </footer>
 
-    <!-- DRAWER / CARRITO DE COMPRAS -->
+    <!-- DRAWER / CARRITO DE COMPRAS (MOCHILA) -->
     <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="toggleCart()"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="toggleCart(false)"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
             <div class="w-screen max-w-md bg-vault-base border-l border-vault-border shadow-2xl flex flex-col justify-between">
                 
@@ -153,7 +153,7 @@
                         <h2 class="text-base sm:text-lg font-serif tracking-widest text-white uppercase">Tu Mochila</h2>
                         <span id="cart-count" class="text-[10px] text-vault-gold tracking-widest uppercase">0 piezas seleccionadas</span>
                     </div>
-                    <button type="button" onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors text-lg p-2 cursor-pointer">✕</button>
+                    <button type="button" onclick="toggleCart(false)" class="text-gray-500 hover:text-white transition-colors text-lg p-2 cursor-pointer">✕</button>
                 </div>
 
                 <div id="cart-items" class="p-6 sm:p-8 space-y-4 overflow-y-auto flex-1">
@@ -213,7 +213,6 @@
                         let hasValidImage = imgUrl.startsWith('http');
                         let condition = r[8] ? r[8].trim() : 'Nuevo';
 
-                        // Segmentación inteligente por palabras clave en categoría, proveedor o título
                         let mappedCategory = 'leather';
                         let combinedText = rawCat + ' ' + provider + ' ' + title;
 
@@ -409,10 +408,10 @@
             updateCartUI();
         }
 
-        function toggleCart(forceOpen = false) {
+        function toggleCart(open) {
             const drawer = document.getElementById('cart-drawer');
             if(!drawer) return;
-            if (forceOpen || drawer.classList.contains('opacity-0')) {
+            if (open) {
                 drawer.classList.remove('opacity-0', 'pointer-events-none');
             } else {
                 drawer.classList.add('opacity-0', 'pointer-events-none');
