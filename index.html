@@ -1,24 +1,30 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" class="dark">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>The Vault MX | Curaduría de Lujo & Tecnología desde León</title>
+    <title>THE VAULT MX — High-End Curator & Private Collection</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
     <script>
         tailwind.config = {
+            darkMode: 'class',
             theme: {
                 extend: {
-                    fontFamily: { sans: ['Plus Jakarta Sans', 'sans-serif'] },
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
                     colors: {
                         vault: {
-                            bg: '#0a0a0c',
-                            card: '#121216',
-                            border: '#22222a',
-                            gold: '#d4af37',
-                            goldhover: '#b59328',
-                            sale: '#ef4444'
+                            base: '#050507',
+                            surface: '#0e0e12',
+                            card: '#14141a',
+                            border: '#262630',
+                            gold: '#c5a880',
+                            goldlight: '#e2d3bc',
+                            golddark: '#9a7e58',
+                            sale: '#d34545'
                         }
                     }
                 }
@@ -26,112 +32,117 @@
         }
     </script>
     <style>
-        body { background-color: #0a0a0c; color: #f3f4f6; }
-        .glass-panel { background: rgba(18, 18, 22, 0.8); backdrop-filter: blur(12px); border: 1px solid #22222a; }
+        body { background-color: #050507; color: #e5e5e7; }
+        .vault-glass { background: rgba(20, 20, 26, 0.75); backdrop-filter: blur(16px); border: 1px solid rgba(197, 168, 128, 0.15); }
+        .vault-card { background: #14141a; border: 1px solid #262630; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); }
+        .vault-card:hover { border-color: rgba(197, 168, 128, 0.4); transform: translateY(-3px); box-shadow: 0 12px 40px -10px rgba(0,0,0,0.7); }
+        .gold-gradient-text { background: linear-gradient(135deg, #e2d3bc 0%, #c5a880 50%, #9a7e58 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
     </style>
 </head>
 <body class="min-h-screen flex flex-col justify-between selection:bg-vault-gold selection:text-black">
 
-    <!-- HEADER -->
-    <header class="sticky top-0 z-40 glass-panel border-b border-vault-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 h-20 flex items-center justify-between">
-            <div class="flex items-center gap-3">
-                <div class="w-10 h-10 rounded-lg bg-gradient-to-br from-vault-gold to-yellow-700 flex items-center justify-center font-bold text-black text-xl shadow-lg shadow-yellow-900/20">
+    <!-- HEADER / NAVEGACIÓN PRIVADA -->
+    <header class="sticky top-0 z-40 vault-glass border-b border-vault-border">
+        <div class="max-w-7xl mx-auto px-6 lg:px-12 h-24 flex items-center justify-between">
+            <div class="flex items-center gap-4">
+                <div class="w-11 h-11 rounded-none border border-vault-gold/40 bg-vault-surface flex items-center justify-center font-serif font-bold text-vault-gold text-xl tracking-widest shadow-2xl">
                     V
                 </div>
                 <div>
-                    <span class="text-xl font-bold tracking-wider text-white block leading-none">THE VAULT</span>
-                    <span class="text-[10px] tracking-widest text-vault-gold uppercase font-semibold">León, Guanajuato</span>
+                    <span class="text-xl font-serif font-bold tracking-[0.25em] text-white block">THE VAULT</span>
+                    <span class="text-[9px] tracking-[0.3em] text-vault-gold uppercase font-medium">Private Collection • León</span>
                 </div>
             </div>
 
-            <button onclick="toggleCart()" class="relative p-2.5 rounded-xl bg-vault-card border border-vault-border hover:border-vault-gold transition-all">
-                <svg class="w-6 h-6 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-xs w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
+            <button onclick="toggleCart()" class="relative p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group">
+                <svg class="w-5 h-5 text-vault-gold group-hover:scale-105 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
+                <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
             </button>
         </div>
     </header>
 
-    <!-- HERO & CONTROLES -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 flex-1 w-full">
-        <div class="text-center max-w-3xl mx-auto mb-8">
-            <span class="inline-block px-3 py-1 bg-vault-gold/10 border border-vault-gold/30 rounded-full text-xs font-semibold text-vault-gold tracking-widest uppercase mb-3">
-                Ediciones Limitadas & Resurtido Just-in-Time
+    <!-- CONTENIDO PRINCIPAL -->
+    <main class="max-w-7xl mx-auto px-6 lg:px-12 py-12 flex-1 w-full">
+        
+        <!-- HERO DE LUJO -->
+        <div class="text-center max-w-3xl mx-auto mb-16">
+            <span class="inline-block text-[10px] uppercase tracking-[0.4em] text-vault-gold mb-4 border-b border-vault-gold/30 pb-1">
+                Curaduría Exclusiva & Adquisiciones de Autor
             </span>
-            <h1 class="text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-4">
-                Piezas de Autor, Joyería & Tech Premium
+            <h1 class="text-3xl sm:text-6xl font-serif font-light tracking-tight text-white mb-6 leading-tight">
+                Objetos de <span class="gold-gradient-text font-normal">Prestigio</span> & Rarezas
             </h1>
-            <p class="text-gray-400 text-sm sm:text-base">
-                Selección exclusiva directo desde origen. Confirma stock y finaliza tu pedido directamente vía WhatsApp con cobro por transferencia SPEI.
+            <p class="text-gray-400 text-xs sm:text-sm font-light tracking-wide max-w-2xl mx-auto leading-relaxed">
+                Selección privada resguardada en origen. Disponibilidad limitada sujeta a confirmación y adquisición directa vía canal cifrado.
             </p>
         </div>
 
         <!-- FILTROS Y BÚSQUEDA -->
-        <div class="flex flex-col md:flex-row gap-4 mb-8 justify-between items-center">
-            <div class="flex flex-wrap gap-2 w-full md:w-auto overflow-x-auto pb-2 md:pb-0" id="category-tabs">
-                <button onclick="setCategory('all')" class="cat-btn active px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-vault-gold text-black transition-all">Todos</button>
-                <button onclick="setCategory('clearance')" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-vault-card text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all flex items-center gap-1.5">
-                    <span>🔥 Liquidación</span>
-                </button>
-                <button onclick="setCategory('leather')" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-vault-card text-gray-300 border border-vault-border hover:border-vault-gold transition-all">Piel & Botas</button>
-                <button onclick="setCategory('gold')" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-vault-card text-gray-300 border border-vault-border hover:border-vault-gold transition-all">Oro Original</button>
-                <button onclick="setCategory('tech')" class="cat-btn px-4 py-2 rounded-xl text-xs sm:text-sm font-semibold bg-vault-card text-gray-300 border border-vault-border hover:border-vault-gold transition-all">Tech & Gadgets</button>
+        <div class="flex flex-col lg:flex-row gap-6 mb-12 justify-between items-center border-y border-vault-border py-6">
+            <div class="flex flex-wrap gap-2.5 w-full lg:w-auto overflow-x-auto pb-2 lg:pb-0" id="category-tabs">
+                <button onclick="setCategory('all')" class="cat-btn active px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all">Catálogo</button>
+                <button onclick="setCategory('clearance')" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all">🔥 Liquidación</button>
+                <button onclick="setCategory('leather')" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Piel & Botas</button>
+                <button onclick="setCategory('gold')" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Oro Original</button>
+                <button onclick="setCategory('tech')" class="cat-btn px-5 py-2.5 text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all">Tech & Gadgets</button>
             </div>
 
-            <input type="text" id="search-input" oninput="renderProducts()" placeholder="Buscar producto o modelo..." class="w-full md:w-64 px-4 py-2 rounded-xl bg-vault-card border border-vault-border text-sm text-white focus:outline-none focus:border-vault-gold transition-all">
+            <div class="w-full lg:w-72">
+                <input type="text" id="search-input" oninput="renderProducts()" placeholder="Buscar en la colección..." class="w-full px-4 py-2.5 bg-vault-surface border border-vault-border text-xs tracking-wider text-white focus:outline-none focus:border-vault-gold transition-all placeholder-gray-600">
+            </div>
         </div>
 
-        <!-- REJILLA -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-            <div class="col-span-full py-16 text-center text-gray-500">Cargando catálogo desde Google Sheets...</div>
+        <!-- REJILLA DE PRODUCTOS -->
+        <div id="product-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+            <div class="col-span-full py-24 text-center text-gray-600 font-serif tracking-widest text-sm">Cargando colección privada...</div>
         </div>
     </main>
 
-    <!-- CARRITO -->
+    <!-- DRAWER / CARRITO DE ADQUISICIÓN -->
     <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div class="absolute inset-0 bg-black/70 backdrop-blur-sm pointer-events-auto" onclick="toggleCart()"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="toggleCart()"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
-            <div class="w-screen max-w-md bg-vault-bg border-l border-vault-border shadow-2xl flex flex-col justify-between">
+            <div class="w-screen max-w-md bg-vault-base border-l border-vault-border shadow-2xl flex flex-col justify-between">
                 
-                <div class="p-6 border-b border-vault-border flex items-center justify-between">
-                    <h2 class="text-xl font-bold text-white flex items-center gap-2">
-                        <span>Tu Bóveda</span>
-                        <span id="cart-count" class="text-xs bg-vault-card px-2 py-0.5 rounded text-vault-gold font-mono">0 items</span>
-                    </h2>
-                    <button onclick="toggleCart()" class="text-gray-400 hover:text-white p-1">✕</button>
+                <div class="p-8 border-b border-vault-border flex items-center justify-between">
+                    <div>
+                        <h2 class="text-lg font-serif tracking-widest text-white uppercase">Solicitud de Adquisición</h2>
+                        <span id="cart-count" class="text-[10px] text-vault-gold tracking-widest uppercase">0 piezas seleccionadas</span>
+                    </div>
+                    <button onclick="toggleCart()" class="text-gray-500 hover:text-white transition-colors text-lg">✕</button>
                 </div>
 
-                <div id="cart-items" class="p-6 space-y-4 overflow-y-auto flex-1">
-                    <p class="text-center text-gray-500 py-8">Tu carrito está vacío.</p>
+                <div id="cart-items" class="p-8 space-y-4 overflow-y-auto flex-1">
+                    <p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La selección está vacía.</p>
                 </div>
 
-                <div class="p-6 border-t border-vault-border bg-vault-card/50 space-y-4">
+                <div class="p-8 border-t border-vault-border bg-vault-surface space-y-5">
                     <div class="space-y-3">
-                        <input type="text" id="cust-name" placeholder="Tu Nombre Completo" class="w-full px-3 py-2 rounded-lg bg-vault-bg border border-vault-border text-sm text-white focus:border-vault-gold outline-none">
-                        <input type="text" id="cust-city" placeholder="Ciudad y Estado de envío" class="w-full px-3 py-2 rounded-lg bg-vault-bg border border-vault-border text-sm text-white focus:border-vault-gold outline-none">
-                        <textarea id="cust-spec" rows="2" placeholder="Talla de bota / especificación adicional (Opcional)" class="w-full px-3 py-2 rounded-lg bg-vault-bg border border-vault-border text-sm text-white focus:border-vault-gold outline-none text-xs"></textarea>
+                        <input type="text" id="cust-name" placeholder="Nombre completo del coleccionista" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
+                        <input type="text" id="cust-city" placeholder="Ciudad / Estado de destino" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
+                        <textarea id="cust-spec" rows="2" placeholder="Especificaciones de talla o personalización (Opcional)" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide resize-none"></textarea>
                     </div>
 
-                    <div class="border-t border-vault-border pt-3 flex justify-between items-center text-lg font-bold">
-                        <span class="text-gray-300">Total Estimado:</span>
-                        <span id="cart-total" class="text-vault-gold font-mono">$0 MXN</span>
+                    <div class="border-t border-vault-border/60 pt-4 flex justify-between items-center">
+                        <span class="text-xs font-serif tracking-widest text-gray-400 uppercase">Inversión Estimada:</span>
+                        <span id="cart-total" class="text-lg font-serif font-bold text-vault-gold">$0 MXN</span>
                     </div>
 
-                    <button onclick="sendWhatsAppOrder()" class="w-full py-3 bg-vault-gold hover:bg-vault-goldhover text-black font-bold rounded-xl shadow-lg transition-all flex items-center justify-center gap-2">
-                        <span>Enviar Pedido a WhatsApp</span>
-                        <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+                    <button onclick="sendWhatsAppOrder()" class="w-full py-4 bg-vault-gold hover:bg-vault-goldlight text-black font-semibold text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-2">
+                        <span>Iniciar Protocolo en WhatsApp</span>
+                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
                     </button>
-                    <p class="text-[11px] text-center text-gray-400">Coordinación de pago SPEI vía WhatsApp al +52 477 671 7098</p>
+                    <p class="text-[10px] text-center text-gray-500 tracking-wider">Transacción asegurada vía SPEI • León, Gto. (+52 477 671 7098)</p>
                 </div>
 
             </div>
         </div>
     </div>
 
-    <!-- SCRIPT BLINDADO CONTRA CELDAS VACÍAS -->
+    <!-- LÓGICA DE CONEXIÓN CSV -->
     <script>
         const SHEET_ID = '1vSZQXyIoyz2PGSlzvpfvz6UNhK8CS2ZaYjORnQRsSN8qdakVCdm0Rs_IJdtAoCkKfb3qMZPYEmoXun';
-        const GOOGLE_SHEETS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
+        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
 
         let products = [];
         let cart = [];
@@ -139,52 +150,38 @@
 
         async function fetchProductsFromSheets() {
             try {
-                const res = await fetch(GOOGLE_SHEETS_URL);
-                const text = await res.text();
+                const res = await fetch(CSV_URL);
+                const data = await res.text();
                 
-                const json = JSON.parse(text.substring(47, text.length - 2));
-                const rows = json.table.rows;
+                const rows = data.split('\n').map(row => {
+                    return row.split(',').map(val => val.replace(/^"|"$/g, '').trim());
+                });
 
                 products = [];
                 
                 for (let i = 1; i < rows.length; i++) {
-                    const r = rows[i].c;
-                    if (r && r[0] && r[0].v !== null && r[0].v !== undefined && String(r[0].v).trim() !== '') {
-                        
-                        // Validar campos de forma segura aunque vengan vacíos en la celda
-                        const title = r[0]?.v ? String(r[0].v) : 'Sin título';
-                        const category = r[1]?.v ? String(r[1].v).toLowerCase().trim() : 'leather';
-                        const partner = r[2]?.v ? String(r[2].v) : 'The Vault';
-                        const spec = r[3]?.v ? String(r[3].v) : '';
-                        const priceNormal = r[4]?.v ? Number(r[4].v) : 0;
-                        const priceDiscount = r[5]?.v ? Number(r[5].v) : 0;
-                        const isClearance = r[6]?.v ? String(r[6].v).toLowerCase().trim() === 'si' : false;
-                        
-                        let image = r[7]?.v ? String(r[7].v) : 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600';
-                        if (!image.startsWith('http')) {
-                            image = 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600';
-                        }
-
+                    const r = rows[i];
+                    if (r && r[0] && r[0] !== '') {
                         products.push({
                             id: `p-${i}`,
-                            title,
-                            category,
-                            partner,
-                            spec,
-                            priceNormal,
-                            priceDiscount,
-                            isClearance,
-                            image
+                            title: r[0] || 'Pieza sin título',
+                            category: (r[1] || 'leather').toLowerCase().trim(),
+                            partner: r[2] || 'The Vault',
+                            spec: r[3] || '',
+                            priceNormal: Number(r[4]) || 0,
+                            priceDiscount: Number(r[5]) || 0,
+                            isClearance: (r[6] || '').toLowerCase().trim() === 'si',
+                            image: (r[7] && r[7].startsWith('http')) ? r[7] : 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=800'
                         });
                     }
                 }
 
                 renderProducts();
             } catch (err) {
-                console.error('Error al conectar con Google Sheets:', err);
+                console.error('Error al conectar:', err);
                 document.getElementById('product-grid').innerHTML = `
-                    <div class="col-span-full py-16 text-center text-red-400">
-                        Error al cargar el catálogo. Verifica que el archivo esté compartido como "Cualquier persona con el enlace".
+                    <div class="col-span-full py-24 text-center text-red-400 font-serif text-xs tracking-widest">
+                        Error de enlace con la colección. Verifique los permisos de Google Sheets.
                     </div>`;
             }
         }
@@ -201,7 +198,7 @@
             });
 
             if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-16 text-center text-gray-500">No hay productos en esta categoría o la hoja está vacía.</div>`;
+                grid.innerHTML = `<div class="col-span-full py-24 text-center text-gray-600 font-serif text-xs tracking-widest uppercase">No se encontraron piezas registradas en esta categoría.</div>`;
                 return;
             }
 
@@ -211,35 +208,35 @@
                 const discountPercent = hasDiscount ? Math.round(((p.priceNormal - p.priceDiscount) / p.priceNormal) * 100) : 0;
 
                 return `
-                <div class="glass-panel rounded-2xl overflow-hidden flex flex-col justify-between border border-vault-border hover:border-vault-gold/50 transition-all duration-300 group">
-                    <div class="relative aspect-square overflow-hidden bg-black/40">
-                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500">
+                <div class="vault-card rounded-none overflow-hidden flex flex-col justify-between group">
+                    <div class="relative aspect-[4/5] overflow-hidden bg-black/60">
+                        <img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">
                         
-                        <div class="absolute top-3 left-3 flex flex-col gap-1.5 items-start">
-                            <span class="px-2.5 py-1 bg-black/80 backdrop-blur border border-vault-gold/40 text-vault-gold text-[10px] font-bold rounded-md uppercase">
+                        <div class="absolute top-4 left-4 flex flex-col gap-2 items-start">
+                            <span class="px-3 py-1 bg-black/90 backdrop-blur-md border border-vault-gold/30 text-vault-gold text-[9px] font-serif tracking-[0.2em] uppercase">
                                 ${p.partner}
                             </span>
-                            ${p.isClearance ? `<span class="px-2.5 py-1 bg-vault-sale text-white text-[10px] font-extrabold rounded-md uppercase tracking-wider shadow-lg">🔥 Liquidación</span>` : ''}
+                            ${p.isClearance ? `<span class="px-3 py-1 bg-vault-sale text-white text-[9px] font-bold tracking-[0.2em] uppercase shadow-lg">🔥 Liquidación</span>` : ''}
                         </div>
 
-                        ${hasDiscount ? `<span class="absolute top-3 right-3 px-2 py-1 bg-yellow-500 text-black text-xs font-black rounded-md">-${discountPercent}%</span>` : ''}
+                        ${hasDiscount ? `<span class="absolute top-4 right-4 px-2.5 py-1 bg-vault-gold text-black text-[10px] font-bold tracking-widest">-${discountPercent}%</span>` : ''}
                     </div>
 
-                    <div class="p-5 flex-1 flex flex-col justify-between">
+                    <div class="p-6 flex-1 flex flex-col justify-between bg-vault-card">
                         <div>
-                            <h3 class="text-lg font-bold text-white group-hover:text-vault-gold transition-colors">${p.title}</h3>
-                            <p class="text-xs text-gray-400 mt-1 line-clamp-2">${p.spec}</p>
+                            <h3 class="text-base font-serif font-normal text-white tracking-wider group-hover:text-vault-gold transition-colors">${p.title}</h3>
+                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">${p.spec}</p>
                         </div>
 
-                        <div class="mt-4 pt-4 border-t border-vault-border/60 flex items-end justify-between">
+                        <div class="mt-6 pt-5 border-t border-vault-border flex items-end justify-between">
                             <div>
-                                ${hasDiscount ? `<span class="block text-xs text-gray-500 line-through">$${p.priceNormal.toLocaleString()} MXN</span>` : ''}
-                                <span class="text-xl font-bold font-mono ${p.isClearance ? 'text-vault-sale' : 'text-vault-gold'}">
+                                ${hasDiscount ? `<span class="block text-[11px] text-gray-600 line-through">$${p.priceNormal.toLocaleString()} MXN</span>` : ''}
+                                <span class="text-lg font-serif font-semibold tracking-wider ${p.isClearance ? 'text-vault-sale' : 'text-vault-gold'}">
                                     $${finalPrice.toLocaleString()} MXN
                                 </span>
                             </div>
-                            <button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-vault-card hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-white font-semibold text-xs rounded-xl transition-all">
-                                + Agregar
+                            <button onclick="addToCart('${p.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all">
+                                Adquirir
                             </button>
                         </div>
                     </div>
@@ -251,11 +248,15 @@
         function setCategory(cat) {
             currentCategory = cat;
             document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-vault-gold', 'text-black');
-                btn.classList.add('bg-vault-card', 'text-gray-300');
+                btn.classList.remove('bg-vault-gold', 'text-black', 'text-vault-sale', 'border-vault-sale/40');
+                btn.classList.add('bg-vault-surface', 'text-gray-400');
             });
-            event.currentTarget.classList.remove('bg-vault-card', 'text-gray-300');
-            event.currentTarget.classList.add('bg-vault-gold', 'text-black');
+            event.currentTarget.classList.remove('bg-vault-surface', 'text-gray-400');
+            if(cat === 'clearance') {
+                event.currentTarget.classList.add('bg-vault-sale/20', 'text-vault-sale', 'border-vault-sale');
+            } else {
+                event.currentTarget.classList.add('bg-vault-gold', 'text-black');
+            }
             renderProducts();
         }
 
@@ -276,11 +277,11 @@
             const badge = document.getElementById('cart-badge');
             badge.innerText = count;
             badge.style.opacity = count > 0 ? '1' : '0';
-            document.getElementById('cart-count').innerText = `${count} items`;
+            document.getElementById('cart-count').innerText = `${count} piezas seleccionadas`;
 
             const container = document.getElementById('cart-items');
             if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-gray-500 py-8">Tu carrito está vacío.</p>`;
+                container.innerHTML = `<p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La selección está vacía.</p>`;
                 document.getElementById('cart-total').innerText = `$0 MXN`;
                 return;
             }
@@ -292,15 +293,15 @@
                 total += subtotal;
 
                 return `
-                <div class="flex items-center justify-between bg-vault-card p-3 rounded-xl border border-vault-border">
-                    <div class="flex-1 pr-2">
-                        <h4 class="text-xs font-bold text-white">${item.title}</h4>
+                <div class="flex items-center justify-between bg-vault-base p-4 border border-vault-border">
+                    <div class="flex-1 pr-3">
+                        <h4 class="text-xs font-serif tracking-wider text-white">${item.title}</h4>
                         <span class="text-[11px] text-vault-gold font-mono">$${price.toLocaleString()} MXN</span>
                     </div>
-                    <div class="flex items-center gap-2">
-                        <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 rounded bg-vault-bg text-gray-400 hover:text-white">-</button>
-                        <span class="text-xs font-mono font-bold">${item.qty}</span>
-                        <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 rounded bg-vault-bg text-gray-400 hover:text-white">+</button>
+                    <div class="flex items-center gap-3">
+                        <button onclick="changeQty('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">−</button>
+                        <span class="text-xs font-mono font-bold text-white">${item.qty}</span>
+                        <button onclick="changeQty('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs">+</button>
                     </div>
                 </div>`;
             }).join('');
@@ -327,28 +328,28 @@
         }
 
         function sendWhatsAppOrder() {
-            if (cart.length === 0) return alert('Agrega al menos un producto a tu carrito.');
+            if (cart.length === 0) return alert('Seleccione al menos una pieza de la colección.');
             const name = document.getElementById('cust-name').value.trim();
             const city = document.getElementById('cust-city').value.trim();
             const spec = document.getElementById('cust-spec').value.trim();
 
-            if (!name || !city) return alert('Por favor ingresa tu Nombre y Ciudad de envío.');
+            if (!name || !city) return alert('Por favor ingrese su Nombre y Ciudad de destino.');
 
             let total = 0;
             let itemsText = cart.map(i => {
                 const price = (i.priceDiscount > 0 && i.priceDiscount < i.priceNormal) ? i.priceDiscount : i.priceNormal;
                 total += price * i.qty;
-                return `• ${i.qty}x ${i.title} (${i.partner}) - $${(price * i.qty).toLocaleString()} MXN`;
+                return `• ${i.qty}x ${i.title} (${i.partner}) — $${(price * i.qty).toLocaleString()} MXN`;
             }).join('\n');
 
-            let msg = `*¡Hola! Quiero solicitar un pedido en The Vault MX:*\n\n` +
-                      `*PRODUCTOS:*\n${itemsText}\n\n` +
-                      `*TOTAL ESTIMADO:* $${total.toLocaleString()} MXN\n\n` +
-                      `*DATOS DE ENVÍO:*\n` +
-                      `• Cliente: ${name}\n` +
+            let msg = `*SOLICITUD PRIVADA — THE VAULT MX*\n\n` +
+                      `*PIEZAS:*\n${itemsText}\n\n` +
+                      `*INVERSIÓN TOTAL:* $${total.toLocaleString()} MXN\n\n` +
+                      `*DATOS DEL COLECCIONISTA:*\n` +
+                      `• Nombre: ${name}\n` +
                       `• Destino: ${city}\n` +
-                      (spec ? `• Detalles/Talla: ${spec}\n` : '') +
-                      `\nQuedo atento a la confirmación de stock y los datos de transferencia bancaria SPEI.`;
+                      (spec ? `• Especificaciones: ${spec}\n` : '') +
+                      `\nQuedo atento para coordinar transferencia SPEI y liberación de envío.`;
 
             const phone = "524776717098";
             window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
