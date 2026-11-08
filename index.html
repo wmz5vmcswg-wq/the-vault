@@ -128,9 +128,10 @@
         </div>
     </div>
 
-    <!-- LOGICA JAVASCRIPT CONECTADA A TU HOJA DE GOOGLE -->
+    <!-- SCRIPT CORREGIDO Y CONECTADO A TU ID -->
     <script>
-        const PUBLISHED_URL = 'https://docs.google.com/spreadsheets/d/e/2PACX-1vSZQXyIoyz2PGSlzvpfvz6UNhK8CS2ZaYjORnQRsSN8qdakVCdm0Rs_IJdtAoCkKfb3qMZPYEmoXun-/pubhtml';
+        const SHEET_ID = '1vSZQXyIoyz2PGSlzvpfvz6UNhK8CS2ZaYjORnQRsSN8qdakVCdm0Rs_IJdtAoCkKfb3qMZPYEmoXun';
+        const GOOGLE_SHEETS_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/gviz/tq?tqx=out:json`;
 
         let products = [];
         let cart = [];
@@ -138,44 +139,38 @@
 
         async function fetchProductsFromSheets() {
             try {
-                const res = await fetch(PUBLISHED_URL);
-                const htmlText = await res.text();
+                const res = await fetch(GOOGLE_SHEETS_URL);
+                const text = await res.text();
                 
-                const parser = new DOMParser();
-                const doc = parser.parseFromString(htmlText, 'text/html');
-                const rows = Array.from(doc.querySelectorAll('table.waffle tbody tr'));
+                const json = JSON.parse(text.substring(47, text.length - 2));
+                const rows = json.table.rows;
 
                 products = [];
                 
-                // Omitir fila 0 (encabezados de columnas)
-                rows.slice(1).forEach((row, index) => {
-                    const cols = Array.from(row.querySelectorAll('td')).map(td => td.innerText.trim());
-                    
-                    if (cols[0] && cols[0] !== '') { 
-                        const priceNormal = parseFloat(cols[4]?.replace(/[^0-9.-]+/g, '')) || 0;
-                        const priceDiscount = parseFloat(cols[5]?.replace(/[^0-9.-]+/g, '')) || 0;
-                        const isClearance = cols[6]?.toLowerCase() === 'si';
-
+                // i = 1 omite la fila 1 de encabezados
+                for (let i = 1; i < rows.length; i++) {
+                    const r = rows[i].c;
+                    if (r && r[0] && r[0].v) {
                         products.push({
-                            id: `p-${index}`,
-                            title: cols[0],
-                            category: cols[1]?.toLowerCase() || 'general',
-                            partner: cols[2] || 'The Vault',
-                            spec: cols[3] || '',
-                            priceNormal: priceNormal,
-                            priceDiscount: priceDiscount,
-                            isClearance: isClearance,
-                            image: cols[7] && cols[7].startsWith('http') ? cols[7] : 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600'
+                            id: `p-${i}`,
+                            title: r[0] ? String(r[0].v || '') : '',
+                            category: r[1] ? String(r[1].v || '').toLowerCase().trim() : 'general',
+                            partner: r[2] ? String(r[2].v || '') : 'The Vault',
+                            spec: r[3] ? String(r[3].v || '') : '',
+                            priceNormal: r[4] ? Number(r[4].v || 0) : 0,
+                            priceDiscount: r[5] ? Number(r[5].v || 0) : 0,
+                            isClearance: r[6] ? String(r[6].v || '').toLowerCase() === 'si' : false,
+                            image: r[7] && String(r[7].v || '').startsWith('http') ? String(r[7].v) : 'https://images.unsplash.com/photo-1551107696-a4b0c5a0d9a2?w=600'
                         });
                     }
-                });
+                }
 
                 renderProducts();
             } catch (err) {
-                console.error('Error cargando catálogo:', err);
+                console.error('Error al conectar con Google Sheets:', err);
                 document.getElementById('product-grid').innerHTML = `
-                    <div class="col-span-full py-12 text-center text-red-400">
-                        Error al conectar con el catálogo de Google Sheets.
+                    <div class="col-span-full py-16 text-center text-red-400">
+                        No se pudo cargar el catálogo. Revisa que en Google Sheets el acceso general esté configurado como "Cualquier persona con el enlace".
                     </div>`;
             }
         }
