@@ -103,6 +103,15 @@ tailwind.config = { theme: { extend: {
   select:focus{border-color:var(--gold);outline:none}
   @media(max-width:520px){.tools{justify-content:center}}
 
+  .toast{position:fixed;left:50%;bottom:calc(1rem + env(safe-area-inset-bottom));transform:translate(-50%,150%);z-index:35;display:flex;align-items:center;gap:1rem;max-width:min(92vw,30rem);background:var(--card);border:1px solid var(--gold);padding:.75rem 1rem;font-size:.85rem;visibility:hidden;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s .35s}
+  .toast.show{transform:translate(-50%,0);visibility:visible;transition:transform .35s cubic-bezier(.2,.8,.2,1),visibility 0s}
+  .toast span{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+  .toast button{color:var(--gold);white-space:nowrap;text-decoration:underline;font-size:.82rem;min-height:2rem}
+  @keyframes pop{50%{transform:scale(1.35)}}
+  #badge.pop{animation:pop .4s}
+  .keep{border:1px solid var(--line);color:var(--gold);padding:.8rem;font-size:.82rem;letter-spacing:.08em;transition:border-color .25s}
+  .keep:hover{border-color:var(--gold)}
+
   /* Garantías y reseñas */
   .gar{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));margin-top:3rem}
   .gar>div{padding:1rem 2rem;text-align:center}
@@ -178,15 +187,15 @@ tailwind.config = { theme: { extend: {
       <div id="tabs" class="tabs" role="tablist">
         <button type="button" class="tab on" data-f="all">Todos</button>
         <button type="button" class="tab sale" data-f="sale">🔥 Liquidación</button>
-        <button type="button" class="tab" data-f="leather">Piel &amp; Botas</button>
         <button type="button" class="tab" data-f="jewelry">Joyería &amp; Relojes</button>
+        <button type="button" class="tab" data-f="leather">Piel &amp; Botas</button>
         <button type="button" class="tab" data-f="tech">Tech &amp; Gadgets</button>
       </div>
     </div>
     <div class="tools">
       <p id="count" style="color:var(--mute);font-size:.85rem" aria-live="polite"></p>
       <label style="display:flex;align-items:center;gap:.7rem;color:var(--mute);font-size:.85rem">Ordenar por
-        <select id="sort"><option value="def">Orden de la hoja</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option></select>
+        <select id="sort"><option value="def">Destacados</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option></select>
       </label>
     </div>
     <p id="status" class="text-center text-sm" style="color:var(--mute);margin-top:2rem" aria-live="polite">Cargando colección…</p>
@@ -218,23 +227,7 @@ tailwind.config = { theme: { extend: {
   <div class="rule"></div>
   <section id="resenas" class="wrap" style="padding-top:5rem;padding-bottom:5rem">
     <h2 class="h2">Clientes que ya volvieron</h2>
-    <div class="rev">
-      <figure>
-        <div class="st" aria-label="5 estrellas">★★★★★</div>
-        <blockquote>Las botas llegaron tal como en las fotos, con una piel espectacular. Saúl me ayudó con la talla y respondió todas mis dudas el mismo día.</blockquote>
-        <figcaption>Ricardo M., Guadalajara</figcaption>
-      </figure>
-      <figure>
-        <div class="st" aria-label="5 estrellas">★★★★★</div>
-        <blockquote>Compré un reloj de regalo y el trato fue impecable. Pago por SPEI, guía de rastreo y un empaque muy cuidado.</blockquote>
-        <figcaption>Daniela G., León</figcaption>
-      </figure>
-      <figure>
-        <div class="st" aria-label="5 estrellas">★★★★★</div>
-        <blockquote>Atención personalizada de verdad. Me explicó la condición de cada pieza y el envío a Monterrey llegó en tres días.</blockquote>
-        <figcaption>Alejandro T., Monterrey</figcaption>
-      </figure>
-    </div>
+    <div class="rev" id="rev"></div>
   </section>
 </main>
 
@@ -246,6 +239,7 @@ tailwind.config = { theme: { extend: {
   <p style="margin-top:1.8rem;color:#5d5a55;font-size:.74rem">© <span id="yr"></span> THE VAULT MX. Precios en pesos mexicanos (MXN). Disponibilidad sujeta a confirmación.</p>
 </footer>
 
+<div id="toast" class="toast" role="status" aria-live="polite"><span id="toastMsg"></span><button type="button" id="toastGo">Ver mochila</button></div>
 <div id="veil" class="veil"></div>
 <aside id="drawer" class="drawer" aria-label="Mi mochila" aria-hidden="true">
   <div class="dhead">
@@ -263,6 +257,7 @@ tailwind.config = { theme: { extend: {
     <textarea id="cNotes" rows="2" placeholder="Especificaciones (talla, color, etc.) – opcional"></textarea>
     <p id="err" class="hidden" style="color:var(--sale);font-size:.8rem"></p>
     <button type="button" id="send" class="send">Enviar pedido por WhatsApp</button>
+    <button type="button" id="keep" class="keep">Seguir comprando</button>
     <p style="font-size:.72rem;color:var(--mute);text-align:center">El pago se coordina por transferencia SPEI con Saúl Falcón.</p>
   </div>
 </aside>
@@ -364,6 +359,21 @@ tailwind.config = { theme: { extend: {
   }
 
   /* ---------- Catálogo ---------- */
+  /* Vista "Todos": las TOP más caras, luego las más baratas y el resto mezclado (joyería, botas, tecnología) */
+  function featured(list) {
+    const TOP = 2, CHEAP = 1;
+    if (list.length <= TOP + CHEAP + 1) return list.slice();
+    const top = list.slice().sort((a, b) => b.price - a.price).slice(0, TOP);
+    const rest = list.filter((p) => !top.includes(p));
+    const cheap = rest.slice().sort((a, b) => a.price - b.price).slice(0, CHEAP);
+    const pool = rest.filter((p) => !cheap.includes(p));
+    const order = ['jewelry', 'leather', 'tech'];
+    const groups = order.map((g) => pool.filter((p) => p.group === g));
+    groups.push(pool.filter((p) => !order.includes(p.group)));
+    const mixed = [];
+    for (let i = 0; groups.some((g) => i < g.length); i++) groups.forEach((g) => { if (i < g.length) mixed.push(g[i]); });
+    return top.concat(cheap, mixed);
+  }
   function visible() {
     let l = filter === 'all' ? products.slice()
       : filter === 'sale' ? products.filter((p) => p.sale)
@@ -371,6 +381,7 @@ tailwind.config = { theme: { extend: {
     const o = $('sort').value;
     if (o === 'asc') l.sort((x, y) => x.price - y.price);
     else if (o === 'desc') l.sort((x, y) => y.price - x.price);
+    else if (filter === 'all') l = featured(l);
     return l;
   }
   function card(p) {
@@ -421,7 +432,7 @@ tailwind.config = { theme: { extend: {
     if (!b) return;
     const id = +b.dataset.add;
     cart.set(id, (cart.get(id) || 0) + 1);
-    renderCart(); openCart();
+    renderCart(); toast(id);
   });
   $('tabs').addEventListener('click', (e) => {
     const b = e.target.closest('.tab');
@@ -467,7 +478,16 @@ tailwind.config = { theme: { extend: {
     else return;
     renderCart();
   });
+  let tt;
+  function toast(id) {
+    const p = byId(id), n = cart.get(id);
+    $('toastMsg').textContent = 'Agregado: ' + p.name + (n > 1 ? ' (×' + n + ')' : '');
+    $('toast').classList.add('show');
+    const bd = $('badge'); bd.classList.remove('pop'); void bd.offsetWidth; bd.classList.add('pop');
+    clearTimeout(tt); tt = setTimeout(() => $('toast').classList.remove('show'), 3500);
+  }
   function openCart() {
+    $('toast').classList.remove('show');
     $('drawer').classList.add('open'); $('veil').classList.add('open');
     $('drawer').setAttribute('aria-hidden', 'false'); document.body.classList.add('no-scroll');
   }
@@ -476,6 +496,8 @@ tailwind.config = { theme: { extend: {
     $('drawer').setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll');
   }
   $('openCart').onclick = openCart;
+  $('toastGo').onclick = openCart;
+  $('keep').onclick = closeCart;
   $('closeCart').onclick = closeCart;
   $('veil').onclick = closeCart;
   document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
@@ -502,6 +524,18 @@ tailwind.config = { theme: { extend: {
       '\n\nQuedo atento para coordinar el pago por transferencia SPEI con tu atención. ¡Gracias!';
     window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
   };
+
+  /* Reseñas de ejemplo: REEMPLÁZALAS por opiniones reales de tus clientes antes de publicar.
+     Formato: [nombre, ciudad, producto, comentario] */
+  const RESENAS = [
+    ['Ricardo M.', 'Guadalajara', 'Botas de piel', 'Las botas llegaron tal como en las fotos, con una piel espectacular. Saúl me ayudó con la talla y respondió todas mis dudas el mismo día.'],
+    ['Daniela G.', 'León', 'Reloj', 'Compré un reloj de regalo y el trato fue impecable. Pago por SPEI, guía de rastreo y un empaque muy cuidado.'],
+    ['Alejandro T.', 'Monterrey', 'Cadena de oro', 'Me explicó el material y el estado de la cadena antes de pagar. El envío a Monterrey llegó en tres días y venía bien protegido.'],
+    ['Mariana R.', 'Querétaro', 'Audífonos', 'Los audífonos llegaron sellados y funcionando perfecto. Me gustó que me dijeran con claridad si la pieza era nueva o de uso.'],
+    ['Jorge L.', 'Ciudad de México', 'Cinturón y cartera de piel', 'Pedí un cinturón y una cartera en el mismo pedido y Saúl lo coordinó en un solo envío. La piel se siente de otro nivel.'],
+    ['Paola S.', 'Puebla', 'Smartwatch', 'Tenía dudas con el smartwatch y me mandó fotos reales antes de pagar. Llegó idéntico a la descripción.']
+  ];
+  $('rev').innerHTML = RESENAS.map((r) => '<figure><div class="st" aria-label="5 estrellas">★★★★★</div><blockquote>' + esc(r[3]) + '</blockquote><figcaption>' + esc(r[0]) + ', ' + esc(r[1]) + '<br><span style="color:#6c6963">Compró: ' + esc(r[2]) + '</span></figcaption></figure>').join('');
 
   $('yr').textContent = new Date().getFullYear();
   renderCart();
