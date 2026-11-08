@@ -89,6 +89,20 @@ tailwind.config = { theme: { extend: {
   .buy{margin-top:1.1rem;border:1px solid var(--gold);color:var(--gold);padding:.8rem;font-size:.82rem;letter-spacing:.1em;transition:.3s;min-height:2.75rem}
   .buy:hover{background:var(--gold);color:var(--base)}
 
+  .track{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;scrollbar-width:none;-webkit-overflow-scrolling:touch}
+  .track::-webkit-scrollbar{display:none}
+  .slide{flex:0 0 100%;scroll-snap-align:center}
+  .slide.emb{aspect-ratio:4/5}
+  .slide iframe{display:block;width:100%;height:100%;border:0}
+  .nav{position:absolute;z-index:3;top:50%;transform:translateY(-50%);width:2.5rem;height:2.5rem;background:rgba(5,5,7,.72);border:1px solid var(--line);color:var(--gold);font-size:1.3rem;display:flex;align-items:center;justify-content:center;transition:.2s}
+  .nav:hover{background:var(--gold);color:var(--base)}
+  .nav.p{left:1.1rem}.nav.n{right:1.1rem}
+  .cnt{position:absolute;z-index:3;bottom:1.1rem;left:50%;transform:translateX(-50%);background:rgba(5,5,7,.78);border:1px solid var(--line);font-size:.7rem;padding:.2rem .65rem;color:#cfcac0}
+  .tools{display:flex;justify-content:space-between;align-items:center;gap:1rem;flex-wrap:wrap;margin-top:2rem}
+  select{background:#0b0b0f;color:var(--txt);border:1px solid var(--line);padding:.65rem .8rem;font-size:16px;font-family:inherit;font-weight:300;border-radius:0;color-scheme:dark}
+  select:focus{border-color:var(--gold);outline:none}
+  @media(max-width:520px){.tools{justify-content:center}}
+
   /* Garantías y reseñas */
   .gar{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));margin-top:3rem}
   .gar>div{padding:1rem 2rem;text-align:center}
@@ -168,6 +182,12 @@ tailwind.config = { theme: { extend: {
         <button type="button" class="tab" data-f="jewelry">Joyería &amp; Relojes</button>
         <button type="button" class="tab" data-f="tech">Tech &amp; Gadgets</button>
       </div>
+    </div>
+    <div class="tools">
+      <p id="count" style="color:var(--mute);font-size:.85rem" aria-live="polite"></p>
+      <label style="display:flex;align-items:center;gap:.7rem;color:var(--mute);font-size:.85rem">Ordenar por
+        <select id="sort"><option value="def">Orden de la hoja</option><option value="asc">Precio: menor a mayor</option><option value="desc">Precio: mayor a menor</option></select>
+      </label>
     </div>
     <p id="status" class="text-center text-sm" style="color:var(--mute);margin-top:2rem" aria-live="polite">Cargando colección…</p>
     <div id="grid" class="grid" style="margin-top:2.2rem"></div>
@@ -290,6 +310,16 @@ tailwind.config = { theme: { extend: {
     return u;
   }
 
+  /* Varias fotos en la celda H: separadas por coma, espacio, salto de línea, ; o | */
+  function parseImgs(v) {
+    return String(v || '').split(/[\s,;|]+/).map(fixImg)
+      .filter((u) => /^https?:\/\//i.test(u) && !/imgur\.com\/(a|gallery)\//i.test(u));
+  }
+  function albumId(v) {
+    const m = String(v || '').match(/imgur\.com\/a\/([A-Za-z0-9]+)/i);
+    return m ? m[1] : '';
+  }
+
   function classify(p) {
     const t = (p.cat + ' ' + p.name + ' ' + p.desc + ' ' + p.prov).toLowerCase();
     const has = (arr, s) => arr.some((k) => s.includes(k));
@@ -319,7 +349,7 @@ tailwind.config = { theme: { extend: {
           const p = {
             id: i, name: (r[0] || '').trim(), cat: (r[1] || '').trim(), prov: (r[2] || '').trim(),
             desc: (r[3] || '').trim(), normal, price, hasDisc: price < normal,
-            sale: onSale, img: fixImg(r[7]), cond: (r[8] || '').trim() || 'Nuevo'
+            sale: onSale, imgs: parseImgs(r[7]), album: albumId(r[7]), cond: (r[8] || '').trim() || 'Nuevo'
           };
           p.group = classify(p);
           return p;
@@ -335,20 +365,27 @@ tailwind.config = { theme: { extend: {
 
   /* ---------- Catálogo ---------- */
   function visible() {
-    if (filter === 'all') return products;
-    if (filter === 'sale') return products.filter((p) => p.sale);
-    return products.filter((p) => p.group === filter);
+    let l = filter === 'all' ? products.slice()
+      : filter === 'sale' ? products.filter((p) => p.sale)
+      : products.filter((p) => p.group === filter);
+    const o = $('sort').value;
+    if (o === 'asc') l.sort((x, y) => x.price - y.price);
+    else if (o === 'desc') l.sort((x, y) => y.price - x.price);
+    return l;
   }
   function card(p) {
-    const ok = /^https?:\/\//i.test(p.img);
-    const fallback = '<div class="ph">Imagen no disponible — Contactar a Saúl Falcón</div>';
-    const media = ok
-      ? '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" referrerpolicy="no-referrer" class="pimg" data-fb="1">'
-      : fallback;
+    const fb = '<div class="ph">Imagen no disponible — Contactar a Saúl Falcón</div>';
+    const multi = p.imgs.length > 1;
+    const slides = p.imgs.length
+      ? p.imgs.map((u) => '<div class="slide"><img src="' + esc(u) + '" alt="' + esc(p.name) + '" loading="lazy" referrerpolicy="no-referrer" class="pimg" data-fb="1"></div>').join('')
+      : p.album
+        ? '<div class="slide emb"><iframe src="https://imgur.com/a/' + esc(p.album) + '/embed?pub=true" loading="lazy" allowfullscreen title="Fotos de ' + esc(p.name) + '"></iframe></div>'
+        : '<div class="slide">' + fb + '</div>';
     const price = p.hasDisc
       ? '<b class="s">' + mxn(p.price) + '</b><s>' + mxn(p.normal) + '</s>'
       : '<b>' + mxn(p.price) + '</b>';
-    return '<article class="pcard"><div class="frame">' + media +
+    return '<article class="pcard"><div class="frame"><div class="track">' + slides + '</div>' +
+      (multi ? '<button type="button" class="nav p" data-nav="-1" aria-label="Foto anterior">‹</button><button type="button" class="nav n" data-nav="1" aria-label="Foto siguiente">›</button><span class="cnt">1 / ' + p.imgs.length + '</span>' : '') +
       (p.sale ? '<span class="tag l">Liquidación</span>' : '') +
       '<span class="tag r">' + esc(p.cond) + '</span></div>' +
       '<div class="pbody"><div class="lot">Lote ' + String(p.id + 1).padStart(3, '0') + '</div>' +
@@ -361,6 +398,7 @@ tailwind.config = { theme: { extend: {
   function render() {
     const list = visible();
     $('grid').innerHTML = list.map(card).join('');
+    $('count').textContent = products.length ? list.length + (list.length === 1 ? ' pieza' : ' piezas') : '';
     if (products.length && !list.length) $('status').textContent = 'No hay piezas en esta categoría por ahora.';
     else if (products.length) $('status').textContent = '';
   }
@@ -373,6 +411,12 @@ tailwind.config = { theme: { extend: {
     }
   }, true);
   $('grid').addEventListener('click', (e) => {
+    const nv = e.target.closest('[data-nav]');
+    if (nv) {
+      const tr = nv.parentNode.querySelector('.track');
+      tr.scrollBy({ left: +nv.dataset.nav * tr.clientWidth, behavior: 'smooth' });
+      return;
+    }
     const b = e.target.closest('[data-add]');
     if (!b) return;
     const id = +b.dataset.add;
@@ -387,6 +431,14 @@ tailwind.config = { theme: { extend: {
     document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('on', t === b));
     render();
   });
+
+  $('grid').addEventListener('scroll', (e) => {
+    const t = e.target;
+    if (!t.classList || !t.classList.contains('track')) return;
+    const c = t.parentNode.querySelector('.cnt');
+    if (c) c.textContent = (Math.round(t.scrollLeft / t.clientWidth) + 1) + ' / ' + t.children.length;
+  }, true);
+  $('sort').addEventListener('change', render);
 
   /* ---------- Mochila ---------- */
   const byId = (id) => products.find((p) => p.id === id);
