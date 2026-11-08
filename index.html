@@ -1,466 +1,450 @@
 <!DOCTYPE html>
-<html lang="es" class="dark">
+<html lang="es-MX">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>THE VAULT MX — Catálogo & Curaduría General</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
-    <script>
-        tailwind.config = {
-            darkMode: 'class',
-            theme: {
-                extend: {
-                    fontFamily: {
-                        sans: ['Plus Jakarta Sans', 'sans-serif'],
-                        serif: ['Cinzel', 'serif'],
-                    },
-                    colors: {
-                        vault: {
-                            base: '#050507',
-                            surface: '#0e0e12',
-                            card: '#14141a',
-                            border: '#262630',
-                            gold: '#c5a880',
-                            goldlight: '#e2d3bc',
-                            golddark: '#9a7e58',
-                            sale: '#d34545'
-                        }
-                    }
-                }
-            }
-        }
-    </script>
-    <style>
-        body { background-color: #050507; color: #e5e5e7; }
-        .vault-glass { background: rgba(20, 20, 26, 0.85); backdrop-filter: blur(16px); border: 1px solid rgba(197, 168, 128, 0.15); }
-        .vault-card { background: #14141a; border: 1px solid #262630; transition: all 0.3s ease; }
-        .vault-card:hover { border-color: rgba(197, 168, 128, 0.4); transform: translateY(-2px); }
-        .gold-gradient-text { background: linear-gradient(135deg, #e2d3bc 0%, #c5a880 50%, #9a7e58 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
-    </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="theme-color" content="#050507">
+<title>THE VAULT MX | Colección privada con asesoría de Saúl Falcón</title>
+<meta name="description" content="Colección privada de piel, botas, joyería, relojes y tech. Asesoría personalizada de Saúl Falcón desde León, Guanajuato.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600&family=Plus+Jakarta+Sans:wght@300;400;500;600&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>
+tailwind.config = { theme: { extend: {
+  colors: { base:'#050507', card:'#14141a', line:'#262630', gold:'#c5a880', sale:'#d34545' },
+  fontFamily: { display:['Cinzel','serif'], sans:['"Plus Jakarta Sans"','system-ui','sans-serif'] }
+}}};
+</script>
+<style>
+  :root{--base:#050507;--card:#14141a;--line:#262630;--gold:#c5a880;--sale:#d34545;--txt:#e8e4dc;--mute:#8d8982;
+        --pad:max(1.25rem,env(safe-area-inset-left));--padr:max(1.25rem,env(safe-area-inset-right))}
+  *{-webkit-tap-highlight-color:transparent}
+  html{scroll-behavior:smooth;-webkit-text-size-adjust:100%}
+  body{background:var(--base);color:var(--txt);font-family:'Plus Jakarta Sans',system-ui,sans-serif;font-weight:300;overflow-x:hidden}
+  .wrap{max-width:84rem;margin:0 auto;padding-left:var(--pad);padding-right:var(--padr)}
+  .rule{height:1px;background:linear-gradient(90deg,transparent,var(--gold),transparent);opacity:.5}
+  .h2{font-family:Cinzel,serif;font-weight:500;font-size:clamp(1.6rem,3.2vw,2.4rem);letter-spacing:.14em;text-align:center;color:var(--txt)}
+  .sub{max-width:34rem;margin:.9rem auto 0;text-align:center;color:var(--mute);font-size:.92rem;line-height:1.7}
+
+  /* Header */
+  header.top{position:sticky;top:0;z-index:30;background:rgba(5,5,7,.88);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);padding-top:env(safe-area-inset-top)}
+  .hbar{height:4.25rem;display:grid;grid-template-columns:1fr auto 1fr;align-items:center;gap:1rem}
+  .brand{font-family:Cinzel,serif;font-size:clamp(1.05rem,2.6vw,1.45rem);letter-spacing:.3em;color:var(--gold);text-align:center;white-space:nowrap}
+  .navl{display:none;gap:2rem;font-size:.82rem;color:var(--mute)}
+  .navl a:hover{color:var(--gold)}
+  @media(min-width:900px){.navl{display:flex}}
+  @media(max-width:899px){.hbar{grid-template-columns:auto 1fr auto}.brand{text-align:left}}
+  .cartbtn{justify-self:end;position:relative;display:flex;align-items:center;gap:.5rem;color:var(--gold);border:1px solid var(--line);padding:.55rem 1rem;font-size:.82rem;transition:.25s}
+  .cartbtn:hover{border-color:var(--gold)}
+  #badge{position:absolute;top:-.55rem;right:-.55rem;min-width:1.35rem;height:1.35rem;padding:0 .3rem;background:var(--gold);color:var(--base);font-size:.72rem;font-weight:600;display:flex;align-items:center;justify-content:center;border-radius:99px}
+  @media(max-width:420px){.cartbtn span.lbl{display:none}}
+
+  /* Hero */
+  .hero{position:relative;min-height:calc(100svh - 4.25rem);display:flex;align-items:center;justify-content:center;text-align:center;overflow:hidden;
+        background:radial-gradient(ellipse at 50% 40%,rgba(197,168,128,.09),transparent 60%),var(--base)}
+  .dial{position:absolute;left:50%;top:50%;width:min(130vmin,62rem);height:min(130vmin,62rem);margin:calc(min(130vmin,62rem)/-2) 0 0 calc(min(130vmin,62rem)/-2);opacity:.22;animation:unlock 3.2s cubic-bezier(.2,.7,.1,1) both}
+  @keyframes unlock{from{transform:rotate(-110deg);opacity:0}to{transform:none;opacity:.22}}
+  .hero-in{position:relative;padding:4rem var(--pad);max-width:44rem;animation:rise 1.4s ease 1.8s both}
+  @keyframes rise{from{opacity:0;transform:translateY(14px)}to{opacity:1;transform:none}}
+  .hero h1{font-family:Cinzel,serif;font-weight:400;font-size:clamp(2.3rem,8vw,5.6rem);letter-spacing:.2em;color:var(--gold);line-height:1.1;padding-left:.2em}
+  .hero p{margin:1.6rem auto 0;color:#b4b0a8;font-size:clamp(.92rem,1.6vw,1.05rem);line-height:1.8;max-width:32rem}
+  .cta{display:inline-block;margin-top:2.4rem;border:1px solid var(--gold);color:var(--gold);padding:.9rem 2.4rem;font-size:.85rem;letter-spacing:.12em;transition:.3s}
+  .cta:hover{background:var(--gold);color:var(--base)}
+  @media(max-height:520px) and (orientation:landscape){.hero{min-height:auto}.hero-in{padding:2.5rem var(--pad)}.hero p{margin-top:.9rem}.cta{margin-top:1.2rem}.hbar{height:3.25rem}}
+
+  /* Tabs */
+  .tabs{display:flex;gap:2.2rem;overflow-x:auto;scrollbar-width:none;padding:0 .25rem;justify-content:flex-start;-webkit-overflow-scrolling:touch}
+  .tabs::-webkit-scrollbar{display:none}
+  @media(min-width:760px){.tabs{justify-content:center}}
+  .tab{position:relative;flex:none;padding:.9rem 0;color:var(--mute);font-size:.88rem;transition:color .25s}
+  .tab::after{content:"";position:absolute;left:0;right:0;bottom:0;height:1px;background:var(--gold);transform:scaleX(0);transition:transform .3s}
+  .tab:hover{color:var(--gold)}
+  .tab.on{color:var(--gold);font-weight:500}
+  .tab.on::after{transform:scaleX(1)}
+  .tab.sale.on,.tab.sale:hover{color:var(--sale)}
+  .tab.sale::after{background:var(--sale)}
+  .tabline{border-bottom:1px solid var(--line)}
+
+  /* Grid y tarjetas */
+  .grid{display:grid;gap:clamp(1rem,2.2vw,1.75rem);grid-template-columns:repeat(auto-fill,minmax(min(100%,16.5rem),1fr))}
+  .pcard{background:var(--card);border:1px solid var(--line);display:flex;flex-direction:column;transition:border-color .3s}
+  .pcard:hover{border-color:rgba(197,168,128,.6)}
+  .frame{position:relative;margin:.65rem .65rem 0;background:#0b0b0f;overflow:hidden}
+  .frame::after{content:"";position:absolute;inset:.5rem;border:1px solid rgba(197,168,128,.28);pointer-events:none}
+  .pimg{display:block;width:100%;aspect-ratio:4/5;object-fit:cover}
+  .ph{aspect-ratio:4/5;display:flex;align-items:center;justify-content:center;text-align:center;padding:2rem;color:var(--mute);font-size:.82rem;line-height:1.7;background:#0b0b0f}
+  .tag{position:absolute;z-index:2;top:1.1rem;font-size:.7rem;padding:.25rem .65rem;letter-spacing:.04em}
+  .tag.l{left:1.1rem;background:var(--sale);color:#fff}
+  .tag.r{right:1.1rem;background:rgba(5,5,7,.78);border:1px solid var(--line);color:#cfcac0}
+  .pbody{padding:1.15rem 1.15rem 1.3rem;display:flex;flex-direction:column;flex:1}
+  .lot{font-family:Cinzel,serif;color:var(--gold);font-size:.78rem;letter-spacing:.14em}
+  .prov{color:var(--mute);font-size:.76rem;margin-top:.15rem}
+  .pname{font-family:Cinzel,serif;font-weight:500;font-size:1.02rem;line-height:1.4;margin-top:.7rem}
+  .pdesc{color:var(--mute);font-size:.84rem;line-height:1.65;margin-top:.5rem;flex:1;display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden}
+  .price{margin-top:1rem;display:flex;align-items:baseline;gap:.6rem;flex-wrap:wrap}
+  .price b{font-family:Cinzel,serif;font-weight:500;font-size:1.2rem;color:var(--gold)}
+  .price b.s{color:var(--sale)}
+  .price s{color:#6c6963;font-size:.82rem}
+  .buy{margin-top:1.1rem;border:1px solid var(--gold);color:var(--gold);padding:.8rem;font-size:.82rem;letter-spacing:.1em;transition:.3s;min-height:2.75rem}
+  .buy:hover{background:var(--gold);color:var(--base)}
+
+  /* Garantías y reseñas */
+  .gar{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,15rem),1fr));margin-top:3rem}
+  .gar>div{padding:1rem 2rem;text-align:center}
+  @media(min-width:760px){.gar>div+div{border-left:1px solid var(--line)}}
+  .gar svg{margin:0 auto;color:var(--gold)}
+  .gar h3{font-family:Cinzel,serif;font-weight:500;color:var(--gold);font-size:1.05rem;letter-spacing:.06em;margin-top:1.2rem}
+  .gar p{color:var(--mute);font-size:.88rem;line-height:1.75;margin-top:.7rem}
+  .rev{display:grid;grid-template-columns:repeat(auto-fit,minmax(min(100%,18rem),1fr));gap:1.5rem;margin-top:3rem}
+  .rev figure{border-top:1px solid var(--gold);padding-top:1.5rem}
+  .rev blockquote{font-size:1.02rem;line-height:1.85;color:#cfcac0}
+  .rev figcaption{margin-top:1.2rem;color:var(--mute);font-size:.82rem}
+  .rev .st{color:var(--gold);letter-spacing:.2em;font-size:.8rem;margin-bottom:1rem}
+
+  /* Mochila */
+  .veil{position:fixed;inset:0;z-index:40;background:rgba(0,0,0,.72);opacity:0;pointer-events:none;transition:opacity .3s}
+  .veil.open{opacity:1;pointer-events:auto}
+  .drawer{position:fixed;top:0;right:0;z-index:50;width:min(100%,28rem);height:100vh;height:100dvh;background:var(--card);border-left:1px solid var(--line);display:flex;flex-direction:column;transform:translateX(100%);transition:transform .38s cubic-bezier(.2,.8,.2,1);visibility:hidden}
+  .drawer.open{transform:none;visibility:visible}
+  .dhead{display:flex;align-items:center;justify-content:space-between;padding:calc(1rem + env(safe-area-inset-top)) 1.4rem 1rem;border-bottom:1px solid var(--line)}
+  .dhead h2{font-family:Cinzel,serif;font-weight:500;color:var(--gold);font-size:1.25rem;letter-spacing:.14em}
+  #items{flex:1;overflow-y:auto;padding:1.2rem 1.4rem;-webkit-overflow-scrolling:touch}
+  .dfoot{border-top:1px solid var(--line);padding:1.1rem 1.4rem calc(1.1rem + env(safe-area-inset-bottom));display:grid;gap:.7rem}
+  .row{display:flex;gap:.9rem;padding-bottom:1.1rem;margin-bottom:1.1rem;border-bottom:1px solid var(--line)}
+  .qty{width:2.2rem;height:2.2rem;border:1px solid var(--line);color:var(--gold);transition:.2s;font-size:1rem}
+  .qty:hover{background:var(--gold);color:var(--base)}
+  input,textarea{background:#0b0b0f;border:1px solid var(--line);padding:.8rem .9rem;width:100%;color:var(--txt);font-size:16px;font-family:inherit;font-weight:300;border-radius:0}
+  input:focus,textarea:focus{border-color:var(--gold);outline:none}
+  button:focus-visible,a:focus-visible{outline:2px solid var(--gold);outline-offset:3px}
+  .send{background:var(--gold);color:var(--base);font-weight:600;padding:.95rem;font-size:.85rem;letter-spacing:.1em;transition:filter .2s}
+  .send:hover{filter:brightness(1.1)}
+  .hidden{display:none}
+  .no-scroll{overflow:hidden}
+  @media(max-height:560px){.drawer{overflow-y:auto}#items{flex:none;overflow:visible}.dhead{position:sticky;top:0;background:var(--card);z-index:2}}
+  @media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important;scroll-behavior:auto!important}.dial{opacity:.22}}
+</style>
 </head>
-<body class="min-h-screen flex flex-col justify-between selection:bg-vault-gold selection:text-black">
+<body>
 
-    <!-- HEADER / NAVEGACIÓN -->
-    <header class="sticky top-0 z-40 vault-glass border-b border-vault-border">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 h-20 sm:h-24 flex items-center justify-between">
-            <div class="flex items-center gap-3 sm:gap-4">
-                <div class="w-10 h-10 sm:w-11 sm:h-11 rounded-none border border-vault-gold/40 bg-vault-surface flex items-center justify-center font-serif font-bold text-vault-gold text-lg sm:text-xl tracking-widest shadow-2xl">
-                    V
-                </div>
-                <div>
-                    <span class="text-base sm:text-xl font-serif font-bold tracking-[0.2em] text-white block">THE VAULT</span>
-                    <span class="text-[8px] sm:text-[9px] tracking-[0.25em] text-vault-gold uppercase font-medium">Asesor: Saúl Falcón • León, Gto.</span>
-                </div>
-            </div>
+<header class="top">
+  <div class="wrap hbar">
+    <nav class="navl" aria-label="Secciones"><a href="#catalogo">Colección</a><a href="#garantias">Garantías</a><a href="#resenas">Reseñas</a></nav>
+    <a href="#top" class="brand">THE VAULT MX</a>
+    <button type="button" id="openCart" aria-label="Abrir mi mochila" class="cartbtn">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8h12l1 12H5L6 8z"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg>
+      <span class="lbl">Mi mochila</span>
+      <span id="badge">0</span>
+    </button>
+  </div>
+  <div class="rule"></div>
+</header>
 
-            <button type="button" onclick="openCartDrawer()" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2 cursor-pointer">
-                <svg class="w-5 h-5 text-vault-gold group-hover:scale-105 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
-                <span class="hidden sm:inline text-xs font-serif uppercase tracking-wider text-gray-300">Mochila</span>
-                <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
-            </button>
-        </div>
-    </header>
-
-    <!-- CONTENIDO PRINCIPAL -->
-    <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-12 py-8 sm:py-12 flex-1 w-full">
-        
-        <!-- HERO -->
-        <div class="text-center max-w-3xl mx-auto mb-10 sm:mb-16">
-            <span class="inline-block text-[10px] uppercase tracking-[0.35em] text-vault-gold mb-3 sm:mb-4 border-b border-vault-gold/30 pb-1">
-                Catálogo General, Ediciones Especiales & Rebajas
-            </span>
-            <h1 class="text-2xl sm:text-5xl lg:text-6xl font-serif font-light tracking-tight text-white mb-4 sm:mb-6 leading-tight">
-                Artículos Exclusivos, <span class="gold-gradient-text font-normal">Comunes & Rebajas</span>
-            </h1>
-            <p class="text-gray-400 text-xs sm:text-sm font-light tracking-wide max-w-2xl mx-auto leading-relaxed px-2">
-                Explora nuestra selección completa de artículos de autor, piezas cotidianas y oportunidades en liquidación directa con atención personalizada de Saúl Falcón.
-            </p>
-        </div>
-
-        <!-- FILTROS DE CATEGORÍA (AISLADOS DE LA MOCHILA) -->
-        <div class="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-12 justify-center items-center border-y border-vault-border py-4 sm:py-6">
-            <div class="flex flex-wrap gap-2.5 justify-center">
-                <button type="button" onclick="filterCategory('all', this)" class="cat-btn active px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all cursor-pointer">Todos</button>
-                <button type="button" onclick="filterCategory('clearance', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all cursor-pointer">🔥 Liquidación</button>
-                <button type="button" onclick="filterCategory('leather', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Piel & Botas</button>
-                <button type="button" onclick="filterCategory('gold', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Oro Original</button>
-                <button type="button" onclick="filterCategory('tech', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Tech & Gadgets</button>
-            </div>
-        </div>
-
-        <!-- REJILLA DE PRODUCTOS -->
-        <div id="product-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8">
-            <div class="col-span-full py-24 text-center text-gray-600 font-serif tracking-widest text-sm">Cargando catálogo...</div>
-        </div>
-
-        <!-- GARANTÍAS Y CONFIANZA -->
-        <section class="mt-20 sm:mt-28 pt-12 sm:pt-16 border-t border-vault-border grid grid-cols-1 sm:grid-cols-3 gap-6 sm:gap-8 text-center">
-            <div class="p-6 bg-vault-card border border-vault-border">
-                <div class="text-vault-gold text-2xl mb-3 font-serif">◈</div>
-                <h3 class="text-sm font-serif uppercase tracking-widest text-white mb-2">Autenticidad Garantizada</h3>
-                <p class="text-xs text-gray-400 leading-relaxed font-light">Cada artículo pasa por un riguroso control de calidad y verificación directo desde origen antes de su despacho.</p>
-            </div>
-            <div class="p-6 bg-vault-card border border-vault-border">
-                <div class="text-vault-gold text-2xl mb-3 font-serif">⚡</div>
-                <h3 class="text-sm font-serif uppercase tracking-widest text-white mb-2">Pagos Seguros vía SPEI</h3>
-                <p class="text-xs text-gray-400 leading-relaxed font-light">Transacciones blindadas y confirmación directa con nuestro asesor Saúl Falcón mediante atención personalizada.</p>
-            </div>
-            <div class="p-6 bg-vault-card border border-vault-border">
-                <div class="text-vault-gold text-2xl mb-3 font-serif">✈</div>
-                <h3 class="text-sm font-serif uppercase tracking-widest text-white mb-2">Envíos Nacionales</h3>
-                <p class="text-xs text-gray-400 leading-relaxed font-light">Empaque protegido de grado industrial y seguimiento puntual de tu paquete hasta la puerta de tu domicilio.</p>
-            </div>
-        </section>
-
-        <!-- RESEÑAS DE CLIENTES -->
-        <section class="mt-16 sm:mt-20 pt-12 sm:pt-16 border-t border-vault-border">
-            <div class="text-center mb-10 sm:mb-12">
-                <span class="text-[10px] uppercase tracking-[0.3em] text-vault-gold">Testimonios</span>
-                <h2 class="text-2xl font-serif text-white mt-2">Lo que dicen nuestros clientes</h2>
-            </div>
-            <div class="grid grid-cols-1 sm:grid-cols-3 gap-6">
-                <div class="bg-vault-card p-6 border border-vault-border relative">
-                    <p class="text-xs text-gray-300 italic mb-4 font-light">"Pedí un par de botas y la calidad superó por completo mis expectativas. Saúl me atendió muy rápido y resolvió todas mis dudas."</p>
-                    <span class="text-[11px] font-serif font-bold text-vault-gold block">— Alejandro M., Guadalajara</span>
-                </div>
-                <div class="bg-vault-card p-6 border border-vault-border relative">
-                    <p class="text-xs text-gray-300 italic mb-4 font-light">"Excelente servicio. Compré un artículo en liquidación y llegó en perfectas condiciones a León. Totalmente recomendados."</p>
-                    <span class="text-[11px] font-serif font-bold text-vault-gold block">— Sofía R., León, Gto.</span>
-                </div>
-                <div class="bg-vault-card p-6 border border-vault-border relative">
-                    <p class="text-xs text-gray-300 italic mb-4 font-light">"La plataforma es muy cómoda para cotizar y el pago por transferencia es seguro. Volveré a comprar sin duda."</p>
-                    <span class="text-[11px] font-serif font-bold text-vault-gold block">— Carlos D., Monterrey</span>
-                </div>
-            </div>
-        </section>
-    </main>
-
-    <!-- FOOTER -->
-    <footer class="bg-vault-surface border-t border-vault-border py-10 sm:py-12 mt-16 sm:mt-20 text-center text-xs text-gray-500 px-4">
-        <p class="font-serif tracking-widest text-vault-gold mb-2">THE VAULT MX</p>
-        <p>Operaciones y logística desde León, Guanajuato. Asesor encargado: Saúl Falcón • Contacto: +52 477 671 7098</p>
-    </footer>
-
-    <!-- DRAWER / CARRITO DE COMPRAS (MOCHILA) -->
-    <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="closeCartDrawer()"></div>
-        <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
-            <div class="w-screen max-w-md bg-vault-base border-l border-vault-border shadow-2xl flex flex-col justify-between">
-                
-                <div class="p-6 sm:p-8 border-b border-vault-border flex items-center justify-between">
-                    <div>
-                        <h2 class="text-base sm:text-lg font-serif tracking-widest text-white uppercase">Tu Mochila</h2>
-                        <span id="cart-count" class="text-[10px] text-vault-gold tracking-widest uppercase">0 piezas seleccionadas</span>
-                    </div>
-                    <button type="button" onclick="closeCartDrawer()" class="text-gray-500 hover:text-white transition-colors text-lg p-2 cursor-pointer">✕</button>
-                </div>
-
-                <div id="cart-items" class="p-6 sm:p-8 space-y-4 overflow-y-auto flex-1">
-                    <p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La mochila está vacía.</p>
-                </div>
-
-                <div class="p-6 sm:p-8 border-t border-vault-border bg-vault-surface space-y-4 sm:space-y-5">
-                    <div class="space-y-3">
-                        <input type="text" id="cust-name" placeholder="Tu Nombre Completo" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
-                        <input type="text" id="cust-city" placeholder="Ciudad y Estado de envío" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide">
-                        <textarea id="cust-spec" rows="2" placeholder="Talla, color o especificación adicional (Opcional)" class="w-full px-4 py-3 bg-vault-base border border-vault-border text-xs text-white focus:border-vault-gold outline-none tracking-wide resize-none"></textarea>
-                    </div>
-
-                    <div class="border-t border-vault-border/60 pt-4 flex justify-between items-center">
-                        <span class="text-xs font-serif tracking-widest text-gray-400 uppercase">Total Estimado:</span>
-                        <span id="cart-total" class="text-lg font-serif font-bold text-vault-gold">$0 MXN</span>
-                    </div>
-
-                    <button type="button" onclick="sendWhatsAppOrder()" class="w-full py-4 bg-vault-gold hover:bg-vault-goldlight text-black font-semibold text-xs uppercase tracking-[0.2em] transition-all shadow-xl flex items-center justify-center gap-2 cursor-pointer">
-                        <span>Enviar Pedido a WhatsApp</span>
-                        <svg class="w-4 h-4" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-                    </button>
-                    <p class="text-[10px] text-center text-gray-500 tracking-wider">Atención con Saúl Falcón • Pago por transferencia SPEI (+52 477 671 7098)</p>
-                </div>
-
-            </div>
-        </div>
+<main id="top">
+  <section class="hero">
+    <svg class="dial" viewBox="0 0 600 600" fill="none" stroke="#c5a880" aria-hidden="true">
+      <circle cx="300" cy="300" r="290" stroke-width="1"/>
+      <circle cx="300" cy="300" r="270" stroke-width="6" stroke-dasharray="1.5 14.1" />
+      <circle cx="300" cy="300" r="225" stroke-width=".8"/>
+      <circle cx="300" cy="300" r="170" stroke-width="1.5" stroke-dasharray="40 8"/>
+      <circle cx="300" cy="300" r="120" stroke-width=".8"/>
+      <path d="M300 10v90M300 500v90M10 300h90M500 300h90" stroke-width="1.2"/>
+    </svg>
+    <div class="hero-in">
+      <h1>THE VAULT MX</h1>
+      <p>Colección privada de piel, botas, joyería, relojes y tecnología. Cada pieza se elige con criterio y cada pedido lo atiende personalmente Saúl Falcón, desde León, Guanajuato.</p>
+      <a href="#catalogo" class="cta">Entrar a la colección</a>
     </div>
+  </section>
 
-    <!-- NÚCLEO DE JAVASCRIPT REHECHO DESDE CERO -->
-    <script>
-        const SHEET_ID = '1Tg0odp3rYCWwNMYdNB19IJupL3NQBvO1jzsN9ZVbm9o';
-        const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
+  <section id="catalogo" class="wrap" style="padding-top:5rem;padding-bottom:5rem">
+    <h2 class="h2">La Colección</h2>
+    <p class="sub">Piezas disponibles hoy. El inventario se actualiza en tiempo real.</p>
+    <div class="tabline" style="margin-top:2.2rem">
+      <div id="tabs" class="tabs" role="tablist">
+        <button type="button" class="tab on" data-f="all">Todos</button>
+        <button type="button" class="tab sale" data-f="sale">🔥 Liquidación</button>
+        <button type="button" class="tab" data-f="leather">Piel &amp; Botas</button>
+        <button type="button" class="tab" data-f="jewelry">Joyería &amp; Relojes</button>
+        <button type="button" class="tab" data-f="tech">Tech &amp; Gadgets</button>
+      </div>
+    </div>
+    <p id="status" class="text-center text-sm" style="color:var(--mute);margin-top:2rem" aria-live="polite">Cargando colección…</p>
+    <div id="grid" class="grid" style="margin-top:2.2rem"></div>
+  </section>
 
-        let catalogProducts = [];
-        let shoppingCart = [];
-        let activeFilter = 'all';
+  <div class="rule"></div>
+  <section id="garantias" class="wrap" style="padding-top:5rem;padding-bottom:5rem">
+    <h2 class="h2">Compra con tranquilidad</h2>
+    <div class="gar">
+      <div>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l7 3v5c0 5-3 8-7 10-4-2-7-5-7-10V6l7-3z"/><path d="M9 12l2 2 4-4"/></svg>
+        <h3>Autenticidad garantizada</h3>
+        <p>Proveedores verificados y revisión pieza por pieza. La condición, nueva o de uso, siempre se indica con claridad.</p>
+      </div>
+      <div>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="6" width="18" height="12" rx="1"/><path d="M3 10h18M7 15h4"/></svg>
+        <h3>Pagos seguros vía SPEI</h3>
+        <p>Pagas por transferencia bancaria. Saúl Falcón te comparte los datos directamente por WhatsApp, sin intermediarios.</p>
+      </div>
+      <div>
+        <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7l9-4 9 4-9 4-9-4z"/><path d="M3 7v10l9 4 9-4V7M12 11v10"/></svg>
+        <h3>Envíos nacionales protegidos</h3>
+        <p>Salen de León, Guanajuato a todo México con empaque reforzado y guía de rastreo.</p>
+      </div>
+    </div>
+  </section>
 
-        async function initStore() {
-            try {
-                const response = await fetch(CSV_URL);
-                const csvData = await response.text();
-                
-                const rows = csvData.split('\n').map(row => {
-                    return row.split(',').map(cell => cell.replace(/^"|"$/g, '').trim());
-                });
+  <div class="rule"></div>
+  <section id="resenas" class="wrap" style="padding-top:5rem;padding-bottom:5rem">
+    <h2 class="h2">Clientes que ya volvieron</h2>
+    <div class="rev">
+      <figure>
+        <div class="st" aria-label="5 estrellas">★★★★★</div>
+        <blockquote>Las botas llegaron tal como en las fotos, con una piel espectacular. Saúl me ayudó con la talla y respondió todas mis dudas el mismo día.</blockquote>
+        <figcaption>Ricardo M., Guadalajara</figcaption>
+      </figure>
+      <figure>
+        <div class="st" aria-label="5 estrellas">★★★★★</div>
+        <blockquote>Compré un reloj de regalo y el trato fue impecable. Pago por SPEI, guía de rastreo y un empaque muy cuidado.</blockquote>
+        <figcaption>Daniela G., León</figcaption>
+      </figure>
+      <figure>
+        <div class="st" aria-label="5 estrellas">★★★★★</div>
+        <blockquote>Atención personalizada de verdad. Me explicó la condición de cada pieza y el envío a Monterrey llegó en tres días.</blockquote>
+        <figcaption>Alejandro T., Monterrey</figcaption>
+      </figure>
+    </div>
+  </section>
+</main>
 
-                catalogProducts = [];
-                
-                for (let i = 1; i < rows.length; i++) {
-                    const r = rows[i];
-                    if (r && r[0] && r[0] !== '') {
-                        let rawCat = r[1] ? r[1].toLowerCase().trim() : '';
-                        let provider = r[2] ? r[2].toLowerCase().trim() : '';
-                        let title = r[0].toLowerCase().trim();
-                        let imgUrl = r[7] ? r[7].trim() : '';
-                        let hasValidImage = imgUrl.startsWith('http');
-                        let condition = r[8] ? r[8].trim() : 'Nuevo';
+<div class="rule"></div>
+<footer class="wrap" style="padding-top:3.5rem;padding-bottom:calc(3rem + env(safe-area-inset-bottom));text-align:center">
+  <div class="brand" style="text-align:center">THE VAULT MX</div>
+  <p style="margin-top:1.2rem;color:#b4b0a8;font-size:.88rem">Asesoría y logística a cargo de Saúl Falcón, León, Guanajuato, México</p>
+  <p style="margin-top:.5rem;color:var(--mute);font-size:.85rem">WhatsApp +52 477 671 7098</p>
+  <p style="margin-top:1.8rem;color:#5d5a55;font-size:.74rem">© <span id="yr"></span> THE VAULT MX. Precios en pesos mexicanos (MXN). Disponibilidad sujeta a confirmación.</p>
+</footer>
 
-                        let mappedCategory = 'leather';
-                        let combinedText = rawCat + ' ' + provider + ' ' + title;
+<div id="veil" class="veil"></div>
+<aside id="drawer" class="drawer" aria-label="Mi mochila" aria-hidden="true">
+  <div class="dhead">
+    <h2>Mi mochila</h2>
+    <button type="button" id="closeCart" aria-label="Cerrar mochila" style="font-size:1.8rem;line-height:1;color:var(--mute);padding:.2rem .5rem">×</button>
+  </div>
+  <div id="items"></div>
+  <div class="dfoot">
+    <div style="display:flex;justify-content:space-between;align-items:baseline">
+      <span style="color:var(--mute);font-size:.85rem">Total estimado</span>
+      <span id="total" style="font-family:Cinzel,serif;font-size:1.35rem;color:var(--gold)">$0 MXN</span>
+    </div>
+    <input id="cName" type="text" placeholder="Tu Nombre Completo *" autocomplete="name">
+    <input id="cCity" type="text" placeholder="Ciudad y Estado de envío *" autocomplete="address-level2">
+    <textarea id="cNotes" rows="2" placeholder="Especificaciones (talla, color, etc.) – opcional"></textarea>
+    <p id="err" class="hidden" style="color:var(--sale);font-size:.8rem"></p>
+    <button type="button" id="send" class="send">Enviar pedido por WhatsApp</button>
+    <p style="font-size:.72rem;color:var(--mute);text-align:center">El pago se coordina por transferencia SPEI con Saúl Falcón.</p>
+  </div>
+</aside>
 
-                        if (combinedText.includes('oro') || combinedText.includes('gold') || combinedText.includes('joya')) {
-                            mappedCategory = 'gold';
-                        } else if (combinedText.includes('tech') || combinedText.includes('gadget') || combinedText.includes('electronica') || combinedText.includes('audifono') || combinedText.includes('reloj')) {
-                            mappedCategory = 'tech';
-                        } else if (combinedText.includes('bota') || combinedText.includes('piel') || combinedText.includes('reyno') || combinedText.includes('leather') || combinedText.includes('vaquera')) {
-                            mappedCategory = 'leather';
-                        } else {
-                            mappedCategory = rawCat || 'leather';
-                        }
+<script>
+(function () {
+  'use strict';
+  const CSV_URL = 'https://docs.google.com/spreadsheets/d/1Tg0odp3rYCWwNMYdNB19IJupL3NQBvO1jzsN9ZVbm9o/export?format=csv&gid=0';
+  const WA = '524776717098';
+  const $ = (id) => document.getElementById(id);
+  const mxn = (n) => '$' + Math.round(n).toLocaleString('es-MX') + ' MXN';
+  const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 
-                        catalogProducts.push({
-                            id: `prod-${i}`,
-                            title: r[0] || 'Artículo sin título',
-                            category: mappedCategory,
-                            partner: r[2] || 'The Vault',
-                            spec: r[3] || '',
-                            priceNormal: Number(r[4]) || 0,
-                            priceDiscount: Number(r[5]) || 0,
-                            isClearance: (r[6] || '').toLowerCase().trim() === 'si',
-                            image: hasValidImage ? imgUrl : null,
-                            condition: condition
-                        });
-                    }
-                }
+  let products = [];
+  let filter = 'all';
+  const cart = new Map(); // id -> cantidad
 
-                renderCatalog();
-            } catch (err) {
-                console.error('Error al conectar:', err);
-                document.getElementById('product-grid').innerHTML = `
-                    <div class="col-span-full py-24 text-center text-red-400 font-serif text-xs tracking-widest">
-                        Error al cargar el catálogo. Verifica los permisos de acceso en Google Sheets.
-                    </div>`;
-            }
-        }
+  /* ---------- CSV ---------- */
+  function parseCSV(text) {
+    const rows = []; let row = [], cur = '', q = false;
+    for (let i = 0; i < text.length; i++) {
+      const c = text[i];
+      if (q) {
+        if (c === '"') { if (text[i + 1] === '"') { cur += '"'; i++; } else q = false; }
+        else cur += c;
+      } else if (c === '"') q = true;
+      else if (c === ',') { row.push(cur); cur = ''; }
+      else if (c === '\n' || c === '\r') {
+        if (c === '\r' && text[i + 1] === '\n') i++;
+        row.push(cur); rows.push(row); row = []; cur = '';
+      } else cur += c;
+    }
+    if (cur || row.length) { row.push(cur); rows.push(row); }
+    return rows.filter((r) => r.some((x) => x.trim() !== ''));
+  }
+  const num = (v) => { const n = parseFloat(String(v || '').replace(/[^0-9.\-]/g, '')); return isNaN(n) ? 0 : n; };
 
-        function renderCatalog() {
-            const gridContainer = document.getElementById('product-grid');
+  function classify(p) {
+    const t = (p.cat + ' ' + p.name + ' ' + p.desc + ' ' + p.prov).toLowerCase();
+    const has = (arr, s) => arr.some((k) => s.includes(k));
+    const J = ['oro', 'joya', 'reloj', 'jewel', 'watch', 'gold', 'plata', 'anillo', 'cadena', 'pulsera', 'diamante'];
+    const L = ['bota', 'piel', 'reyno', 'leather', 'boot', 'cinto', 'cartera', 'cuero'];
+    const T = ['tech', 'gadget', 'audif', 'cargador', 'iphone', 'apple', 'cámara', 'camara', 'bocina'];
+    const c = p.cat.toLowerCase();
+    if (has(J, c)) return 'jewelry';
+    if (has(L, c)) return 'leather';
+    if (has(T, c)) return 'tech';
+    if (has(J, t)) return 'jewelry';
+    if (has(L, t)) return 'leather';
+    if (has(T, t)) return 'tech';
+    return 'other';
+  }
 
-            const filteredList = catalogProducts.filter(item => {
-                if (activeFilter === 'all') return true;
-                if (activeFilter === 'clearance') return item.isClearance;
-                return item.category === activeFilter;
-            });
+  function load() {
+    fetch(CSV_URL, { cache: 'no-store' })
+      .then((r) => { if (!r.ok) throw new Error('HTTP ' + r.status); return r.text(); })
+      .then((txt) => {
+        const rows = parseCSV(txt);
+        if (rows.length && /^nombre$/i.test((rows[0][0] || '').trim())) rows.shift();
+        products = rows.map((r, i) => {
+          const normal = num(r[4]), disc = num(r[5]);
+          const onSale = (r[6] || '').trim().toUpperCase().startsWith('S');
+          const price = disc > 0 && disc < normal ? disc : normal;
+          const p = {
+            id: i, name: (r[0] || '').trim(), cat: (r[1] || '').trim(), prov: (r[2] || '').trim(),
+            desc: (r[3] || '').trim(), normal, price, hasDisc: price < normal,
+            sale: onSale, img: (r[7] || '').trim(), cond: (r[8] || '').trim() || 'Nuevo'
+          };
+          p.group = classify(p);
+          return p;
+        }).filter((p) => p.name && p.price > 0);
+        $('status').textContent = products.length ? '' : 'Por ahora no hay piezas disponibles. Escríbele a Saúl Falcón por WhatsApp.';
+        render();
+      })
+      .catch(() => {
+        $('status').innerHTML = 'No se pudo cargar el catálogo. Revisa que la hoja de Google esté pública o <button type="button" id="retry" style="text-decoration:underline;color:var(--gold)">intenta de nuevo</button>.';
+        const b = $('retry'); if (b) b.onclick = () => { $('status').textContent = 'Cargando colección…'; load(); };
+      });
+  }
 
-            if (filteredList.length === 0) {
-                gridContainer.innerHTML = `<div class="col-span-full py-24 text-center text-gray-600 font-serif text-xs tracking-widest uppercase">No hay artículos disponibles en esta categoría.</div>`;
-                return;
-            }
+  /* ---------- Catálogo ---------- */
+  function visible() {
+    if (filter === 'all') return products;
+    if (filter === 'sale') return products.filter((p) => p.sale);
+    return products.filter((p) => p.group === filter);
+  }
+  function card(p) {
+    const ok = /^https?:\/\//i.test(p.img);
+    const fallback = '<div class="ph">Imagen no disponible — Contactar a Saúl Falcón</div>';
+    const media = ok
+      ? '<img src="' + esc(p.img) + '" alt="' + esc(p.name) + '" loading="lazy" referrerpolicy="no-referrer" class="pimg" data-fb="1">'
+      : fallback;
+    const price = p.hasDisc
+      ? '<b class="s">' + mxn(p.price) + '</b><s>' + mxn(p.normal) + '</s>'
+      : '<b>' + mxn(p.price) + '</b>';
+    return '<article class="pcard"><div class="frame">' + media +
+      (p.sale ? '<span class="tag l">Liquidación</span>' : '') +
+      '<span class="tag r">' + esc(p.cond) + '</span></div>' +
+      '<div class="pbody"><div class="lot">Lote ' + String(p.id + 1).padStart(3, '0') + '</div>' +
+      (p.prov ? '<div class="prov">' + esc(p.prov) + '</div>' : '') +
+      '<h3 class="pname">' + esc(p.name) + '</h3>' +
+      '<p class="pdesc">' + esc(p.desc) + '</p>' +
+      '<div class="price">' + price + '</div>' +
+      '<button type="button" data-add="' + p.id + '" class="buy">Adquirir</button></div></article>';
+  }
+  function render() {
+    const list = visible();
+    $('grid').innerHTML = list.map(card).join('');
+    if (products.length && !list.length) $('status').textContent = 'No hay piezas en esta categoría por ahora.';
+    else if (products.length) $('status').textContent = '';
+  }
+  $('grid').addEventListener('error', (e) => {
+    const t = e.target;
+    if (t.tagName === 'IMG' && t.dataset.fb) {
+      const d = document.createElement('div');
+      d.className = 'ph'; d.textContent = 'Imagen no disponible — Contactar a Saúl Falcón';
+      t.replaceWith(d);
+    }
+  }, true);
+  $('grid').addEventListener('click', (e) => {
+    const b = e.target.closest('[data-add]');
+    if (!b) return;
+    const id = +b.dataset.add;
+    cart.set(id, (cart.get(id) || 0) + 1);
+    renderCart(); openCart();
+  });
+  $('tabs').addEventListener('click', (e) => {
+    const b = e.target.closest('.tab');
+    if (!b) return;
+    e.preventDefault(); e.stopPropagation();
+    filter = b.dataset.f;
+    document.querySelectorAll('.tab').forEach((t) => t.classList.toggle('on', t === b));
+    render();
+  });
 
-            gridContainer.innerHTML = filteredList.map(item => {
-                const hasDiscount = item.priceDiscount > 0 && item.priceDiscount < item.priceNormal;
-                const finalPrice = hasDiscount ? item.priceDiscount : item.priceNormal;
-                const discountPercent = hasDiscount ? Math.round(((item.priceNormal - item.priceDiscount) / item.priceNormal) * 100) : 0;
+  /* ---------- Mochila ---------- */
+  const byId = (id) => products.find((p) => p.id === id);
+  function renderCart() {
+    let count = 0, total = 0, html = '';
+    cart.forEach((q, id) => {
+      const p = byId(id); if (!p) return;
+      count += q; total += p.price * q;
+      html += '<div class="row"><div style="flex:1;min-width:0"><div style="font-size:.92rem;line-height:1.45;font-weight:400">' + esc(p.name) + '</div>' +
+        '<div style="font-size:.74rem;color:var(--mute);margin-top:.3rem">' + esc(p.cond) + (p.prov ? ' · ' + esc(p.prov) : '') + '</div>' +
+        '<div style="font-size:.78rem;color:var(--mute);margin-top:.2rem">' + mxn(p.price) + ' c/u</div>' +
+        '<div style="display:flex;align-items:center;gap:.8rem;margin-top:.8rem">' +
+        '<button type="button" class="qty" data-dec="' + id + '" aria-label="Quitar una pieza">−</button>' +
+        '<span style="width:1.2rem;text-align:center;font-size:.9rem">' + q + '</span>' +
+        '<button type="button" class="qty" data-inc="' + id + '" aria-label="Agregar una pieza">+</button></div></div>' +
+        '<div style="color:var(--gold);font-size:.88rem;white-space:nowrap">' + mxn(p.price * q) + '</div></div>';
+    });
+    $('items').innerHTML = html || '<p style="color:var(--mute);font-size:.88rem;text-align:center;margin-top:2.5rem">Tu mochila está vacía. Elige una pieza del catálogo con el botón Adquirir.</p>';
+    $('total').textContent = mxn(total);
+    $('badge').textContent = count;
+  }
+  $('items').addEventListener('click', (e) => {
+    const inc = e.target.closest('[data-inc]'), dec = e.target.closest('[data-dec]');
+    if (inc) { const id = +inc.dataset.inc; cart.set(id, cart.get(id) + 1); }
+    else if (dec) { const id = +dec.dataset.dec, q = cart.get(id) - 1; q <= 0 ? cart.delete(id) : cart.set(id, q); }
+    else return;
+    renderCart();
+  });
+  function openCart() {
+    $('drawer').classList.add('open'); $('veil').classList.add('open');
+    $('drawer').setAttribute('aria-hidden', 'false'); document.body.classList.add('no-scroll');
+  }
+  function closeCart() {
+    $('drawer').classList.remove('open'); $('veil').classList.remove('open');
+    $('drawer').setAttribute('aria-hidden', 'true'); document.body.classList.remove('no-scroll');
+  }
+  $('openCart').onclick = openCart;
+  $('closeCart').onclick = closeCart;
+  $('veil').onclick = closeCart;
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeCart(); });
 
-                let imageBlock = '';
-                if (item.image) {
-                    imageBlock = `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">`;
-                } else {
-                    imageBlock = `
-                    <div class="w-full h-full flex flex-col items-center justify-center bg-vault-base p-6 text-center border border-vault-border/50">
-                        <svg class="w-8 h-8 text-vault-gold/40 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
-                        <span class="text-[11px] font-serif text-gray-400 tracking-wider uppercase">Imagen no disponible</span>
-                        <span class="text-[9px] text-vault-gold mt-1 tracking-widest uppercase">Contactar a Saúl Falcón</span>
-                    </div>`;
-                }
+  /* ---------- WhatsApp ---------- */
+  $('send').onclick = function () {
+    const name = $('cName').value.trim(), city = $('cCity').value.trim(), notes = $('cNotes').value.trim();
+    const err = $('err');
+    let count = 0, total = 0, lines = [];
+    cart.forEach((q, id) => {
+      const p = byId(id); if (!p) return;
+      count += q; total += p.price * q;
+      lines.push((lines.length + 1) + '. ' + p.name + '\n   Cantidad: ' + q + '\n   Condición: ' + p.cond +
+        '\n   Proveedor: ' + (p.prov || 'N/D') + '\n   Precio unitario: ' + mxn(p.price) + '\n   Subtotal: ' + mxn(p.price * q));
+    });
+    err.classList.remove('hidden');
+    if (!count) { err.textContent = 'Agrega al menos una pieza a tu mochila.'; return; }
+    if (!name || !city) { err.textContent = 'Completa tu nombre y la ciudad y estado de envío.'; return; }
+    err.classList.add('hidden');
+    const msg = 'Hola Saúl, quiero hacer un pedido en THE VAULT MX.\n\n*MI PEDIDO*\n' + lines.join('\n\n') +
+      '\n\n*Total de piezas:* ' + count + '\n*Inversión total:* ' + mxn(total) +
+      '\n\n*DATOS DEL CLIENTE*\nNombre: ' + name + '\nCiudad y Estado: ' + city +
+      (notes ? '\nEspecificaciones: ' + notes : '') +
+      '\n\nQuedo atento para coordinar el pago por transferencia SPEI con tu atención. ¡Gracias!';
+    window.open('https://wa.me/' + WA + '?text=' + encodeURIComponent(msg), '_blank', 'noopener');
+  };
 
-                return `
-                <div class="vault-card rounded-none overflow-hidden flex flex-col justify-between group">
-                    <div class="relative aspect-[4/5] overflow-hidden bg-black/60">
-                        ${imageBlock}
-                        
-                        <div class="absolute top-4 left-4 flex flex-col gap-2 items-start">
-                            <span class="px-3 py-1 bg-black/90 backdrop-blur-md border border-vault-gold/30 text-vault-gold text-[9px] font-serif tracking-[0.2em] uppercase">
-                                ${item.partner}
-                            </span>
-                            <span class="px-2.5 py-1 bg-vault-surface/90 border border-vault-border text-gray-300 text-[9px] font-mono tracking-wider uppercase">
-                                ${item.condition}
-                            </span>
-                            ${item.isClearance ? `<span class="px-3 py-1 bg-vault-sale text-white text-[9px] font-bold tracking-[0.2em] uppercase shadow-lg">🔥 Liquidación</span>` : ''}
-                        </div>
-
-                        ${hasDiscount ? `<span class="absolute top-4 right-4 px-2.5 py-1 bg-vault-gold text-black text-[10px] font-bold tracking-widest">-${discountPercent}%</span>` : ''}
-                    </div>
-
-                    <div class="p-6 flex-1 flex flex-col justify-between bg-vault-card">
-                        <div>
-                            <h3 class="text-base font-serif font-normal text-white tracking-wider group-hover:text-vault-gold transition-colors">${item.title}</h3>
-                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">${item.spec}</p>
-                        </div>
-
-                        <div class="mt-6 pt-5 border-t border-vault-border flex items-end justify-between">
-                            <div>
-                                ${hasDiscount ? `<span class="block text-[11px] text-gray-600 line-through">$${item.priceNormal.toLocaleString()} MXN</span>` : ''}
-                                <span class="text-lg font-serif font-semibold tracking-wider ${item.isClearance ? 'text-vault-sale' : 'text-vault-gold'}">
-                                    $${finalPrice.toLocaleString()} MXN
-                                </span>
-                            </div>
-                            <button type="button" onclick="addProductToCart('${item.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all cursor-pointer">
-                                Adquirir
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                `;
-            }).join('');
-        }
-
-        function filterCategory(categoryKey, btnElement) {
-            activeFilter = categoryKey;
-            document.querySelectorAll('.cat-btn').forEach(btn => {
-                btn.classList.remove('bg-vault-gold', 'text-black', 'text-vault-sale', 'border-vault-sale');
-                btn.classList.add('bg-vault-surface', 'text-gray-400');
-            });
-            if (btnElement) {
-                btnElement.classList.remove('bg-vault-surface', 'text-gray-400');
-                if(categoryKey === 'clearance') {
-                    btnElement.classList.add('bg-vault-sale/20', 'text-vault-sale', 'border-vault-sale');
-                } else {
-                    btnElement.classList.add('bg-vault-gold', 'text-black');
-                }
-            }
-            renderCatalog();
-        }
-
-        function addProductToCart(productId) {
-            const product = catalogProducts.find(p => p.id === productId);
-            if (!product) return;
-
-            const cartItem = shoppingCart.find(i => i.id === productId);
-            if (cartItem) {
-                cartItem.qty += 1;
-            } else {
-                shoppingCart.push({ ...product, qty: 1 });
-            }
-
-            refreshCartDisplay();
-            openCartDrawer();
-        }
-
-        function refreshCartDisplay() {
-            const totalUnits = shoppingCart.reduce((sum, item) => sum + item.qty, 0);
-            
-            const badgeEl = document.getElementById('cart-badge');
-            if(badgeEl) {
-                badgeEl.innerText = totalUnits;
-                badgeEl.style.opacity = totalUnits > 0 ? '1' : '0';
-            }
-
-            const countLabel = document.getElementById('cart-count');
-            if(countLabel) {
-                countLabel.innerText = `${totalUnits} piezas seleccionadas`;
-            }
-
-            const itemsContainer = document.getElementById('cart-items');
-            if(!itemsContainer) return;
-
-            if (shoppingCart.length === 0) {
-                itemsContainer.innerHTML = `<p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La mochila está vacía.</p>`;
-                document.getElementById('cart-total').innerText = `$0 MXN`;
-                return;
-            }
-
-            let grandTotal = 0;
-            itemsContainer.innerHTML = shoppingCart.map(item => {
-                const effectivePrice = (item.priceDiscount > 0 && item.priceDiscount < item.priceNormal) ? item.priceDiscount : item.priceNormal;
-                const lineTotal = effectivePrice * item.qty;
-                grandTotal += lineTotal;
-
-                return `
-                <div class="flex items-center justify-between bg-vault-base p-4 border border-vault-border">
-                    <div class="flex-1 pr-3">
-                        <h4 class="text-xs font-serif tracking-wider text-white">${item.title} <span class="text-[10px] text-vault-gold">(${item.condition})</span></h4>
-                        <span class="text-[11px] text-vault-gold font-mono">$${effectivePrice.toLocaleString()} c/u (Sub: $${lineTotal.toLocaleString()})</span>
-                    </div>
-                    <div class="flex items-center gap-3">
-                        <button type="button" onclick="modifyQuantity('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">−</button>
-                        <span class="text-xs font-mono font-bold text-white">${item.qty}</span>
-                        <button type="button" onclick="modifyQuantity('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">+</button>
-                    </div>
-                </div>`;
-            }).join('');
-
-            document.getElementById('cart-total').innerText = `$${grandTotal.toLocaleString()} MXN`;
-        }
-
-        function modifyQuantity(productId, changeAmount) {
-            const cartItem = shoppingCart.find(i => i.id === productId);
-            if (cartItem) {
-                cartItem.qty += changeAmount;
-                if (cartItem.qty <= 0) {
-                    shoppingCart = shoppingCart.filter(i => i.id !== productId);
-                }
-            }
-            refreshCartDisplay();
-        }
-
-        function openCartDrawer() {
-            const drawer = document.getElementById('cart-drawer');
-            if(drawer) {
-                drawer.classList.remove('opacity-0', 'pointer-events-none');
-            }
-        }
-
-        function closeCartDrawer() {
-            const drawer = document.getElementById('cart-drawer');
-            if(drawer) {
-                drawer.classList.add('opacity-0', 'pointer-events-none');
-            }
-        }
-
-        function sendWhatsAppOrder() {
-            if (shoppingCart.length === 0) return alert('Seleccione al menos una pieza de la colección.');
-            
-            const nameInput = document.getElementById('cust-name');
-            const cityInput = document.getElementById('cust-city');
-            const specInput = document.getElementById('cust-spec');
-
-            const clientName = nameInput ? nameInput.value.trim() : '';
-            const clientCity = cityInput ? cityInput.value.trim() : '';
-            const clientSpec = specInput ? specInput.value.trim() : '';
-
-            if (!clientName || !clientCity) return alert('Por favor ingrese su Nombre y Ciudad de destino.');
-
-            let accumulatedTotal = 0;
-            let orderSummaryText = shoppingCart.map(item => {
-                const priceToUse = (item.priceDiscount > 0 && item.priceDiscount < item.priceNormal) ? item.priceDiscount : item.priceNormal;
-                const itemSubtotal = priceToUse * item.qty;
-                accumulatedTotal += itemSubtotal;
-                return `• ${item.qty}x ${item.title} [Condición: ${item.condition}] (${item.partner}) — $${priceToUse.toLocaleString()} c/u (Subtotal: $${itemSubtotal.toLocaleString()} MXN)`;
-            }).join('\n');
-
-            let finalWhatsAppMessage = `*SOLICITUD DE PEDIDO — THE VAULT MX*\n\n` +
-                                       `*PIEZAS SOLICITADAS:*\n${orderSummaryText}\n\n` +
-                                       `*INVERSIÓN TOTAL:* $${accumulatedTotal.toLocaleString()} MXN\n\n` +
-                                       `*DATOS DEL CLIENTE:*\n` +
-                                       `• Nombre: ${clientName}\n` +
-                                       `• Destino: ${clientCity}\n` +
-                                       (clientSpec ? `• Especificaciones: ${clientSpec}\n` : '') +
-                                       `\nQuedo atento a la confirmación de Saúl Falcón para coordinar la transferencia SPEI y el envío.`;
-
-            const destinationPhone = "524776717098";
-            window.open(`https://wa.me/${destinationPhone}?text=${encodeURIComponent(finalWhatsAppMessage)}`, '_blank');
-        }
-
-        window.onload = initStore;
-    </script>
+  $('yr').textContent = new Date().getFullYear();
+  renderCart();
+  load();
+})();
+</script>
 </body>
 </html>
