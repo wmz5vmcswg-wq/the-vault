@@ -280,6 +280,16 @@ tailwind.config = { theme: { extend: {
   }
   const num = (v) => { const n = parseFloat(String(v || '').replace(/[^0-9.\-]/g, '')); return isNaN(n) ? 0 : n; };
 
+  /* Convierte enlaces de Imgur (imgur.com/ID o i.imgur.com/ID) en enlace directo .jpg */
+  function fixImg(u) {
+    u = (u || '').trim();
+    let m = u.match(/^https?:\/\/(?:www\.|m\.)?imgur\.com\/([A-Za-z0-9]{5,8})(?:\.\w+)?(?:[?#].*)?$/i);
+    if (m) return 'https://i.imgur.com/' + m[1] + '.jpg';
+    m = u.match(/^https?:\/\/i\.imgur\.com\/([A-Za-z0-9]{5,8})(?:[?#].*)?$/i);
+    if (m) return 'https://i.imgur.com/' + m[1] + '.jpg';
+    return u;
+  }
+
   function classify(p) {
     const t = (p.cat + ' ' + p.name + ' ' + p.desc + ' ' + p.prov).toLowerCase();
     const has = (arr, s) => arr.some((k) => s.includes(k));
@@ -309,7 +319,7 @@ tailwind.config = { theme: { extend: {
           const p = {
             id: i, name: (r[0] || '').trim(), cat: (r[1] || '').trim(), prov: (r[2] || '').trim(),
             desc: (r[3] || '').trim(), normal, price, hasDisc: price < normal,
-            sale: onSale, img: (r[7] || '').trim(), cond: (r[8] || '').trim() || 'Nuevo'
+            sale: onSale, img: fixImg(r[7]), cond: (r[8] || '').trim() || 'Nuevo'
           };
           p.group = classify(p);
           return p;
