@@ -54,7 +54,7 @@
                 </div>
             </div>
 
-            <button type="button" onclick="toggleCart(true)" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2 cursor-pointer">
+            <button type="button" onclick="openCartDrawer()" class="relative p-2.5 sm:p-3 rounded-none bg-vault-surface border border-vault-border hover:border-vault-gold transition-all duration-300 group flex items-center gap-2 cursor-pointer">
                 <svg class="w-5 h-5 text-vault-gold group-hover:scale-105 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"/></svg>
                 <span class="hidden sm:inline text-xs font-serif uppercase tracking-wider text-gray-300">Mochila</span>
                 <span id="cart-badge" class="absolute -top-1.5 -right-1.5 bg-vault-gold text-black font-bold text-[10px] w-5 h-5 rounded-full flex items-center justify-center opacity-0 transition-opacity">0</span>
@@ -78,14 +78,14 @@
             </p>
         </div>
 
-        <!-- FILTROS DE CATEGORÍA -->
+        <!-- FILTROS DE CATEGORÍA (AISLADOS DE LA MOCHILA) -->
         <div class="flex flex-col sm:flex-row gap-4 mb-10 sm:mb-12 justify-center items-center border-y border-vault-border py-4 sm:py-6">
-            <div class="flex flex-wrap gap-2.5 justify-center" id="category-tabs">
-                <button type="button" onclick="setCategory('all', this)" class="cat-btn active px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all cursor-pointer">Todos</button>
-                <button type="button" onclick="setCategory('clearance', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all cursor-pointer">🔥 Liquidación</button>
-                <button type="button" onclick="setCategory('leather', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Piel & Botas</button>
-                <button type="button" onclick="setCategory('gold', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Oro Original</button>
-                <button type="button" onclick="setCategory('tech', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Tech & Gadgets</button>
+            <div class="flex flex-wrap gap-2.5 justify-center">
+                <button type="button" onclick="filterCategory('all', this)" class="cat-btn active px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-gold text-black transition-all cursor-pointer">Todos</button>
+                <button type="button" onclick="filterCategory('clearance', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-vault-sale border border-vault-sale/40 hover:bg-vault-sale/10 transition-all cursor-pointer">🔥 Liquidación</button>
+                <button type="button" onclick="filterCategory('leather', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Piel & Botas</button>
+                <button type="button" onclick="filterCategory('gold', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Oro Original</button>
+                <button type="button" onclick="filterCategory('tech', this)" class="cat-btn px-4 sm:px-5 py-2 sm:py-2.5 text-[11px] sm:text-xs font-medium uppercase tracking-widest bg-vault-surface text-gray-400 border border-vault-border hover:border-vault-gold transition-all cursor-pointer">Tech & Gadgets</button>
             </div>
         </div>
 
@@ -144,7 +144,7 @@
 
     <!-- DRAWER / CARRITO DE COMPRAS (MOCHILA) -->
     <div id="cart-drawer" class="fixed inset-0 z-50 overflow-hidden pointer-events-none transition-opacity duration-300 opacity-0">
-        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="toggleCart(false)"></div>
+        <div class="absolute inset-0 bg-black/80 backdrop-blur-md pointer-events-auto" onclick="closeCartDrawer()"></div>
         <div class="fixed inset-y-0 right-0 max-w-full flex pl-10 pointer-events-auto">
             <div class="w-screen max-w-md bg-vault-base border-l border-vault-border shadow-2xl flex flex-col justify-between">
                 
@@ -153,7 +153,7 @@
                         <h2 class="text-base sm:text-lg font-serif tracking-widest text-white uppercase">Tu Mochila</h2>
                         <span id="cart-count" class="text-[10px] text-vault-gold tracking-widest uppercase">0 piezas seleccionadas</span>
                     </div>
-                    <button type="button" onclick="toggleCart(false)" class="text-gray-500 hover:text-white transition-colors text-lg p-2 cursor-pointer">✕</button>
+                    <button type="button" onclick="closeCartDrawer()" class="text-gray-500 hover:text-white transition-colors text-lg p-2 cursor-pointer">✕</button>
                 </div>
 
                 <div id="cart-items" class="p-6 sm:p-8 space-y-4 overflow-y-auto flex-1">
@@ -183,25 +183,25 @@
         </div>
     </div>
 
-    <!-- LÓGICA DE JAVASCRIPT BLINDADA -->
+    <!-- NÚCLEO DE JAVASCRIPT REHECHO DESDE CERO -->
     <script>
         const SHEET_ID = '1Tg0odp3rYCWwNMYdNB19IJupL3NQBvO1jzsN9ZVbm9o';
         const CSV_URL = `https://docs.google.com/spreadsheets/d/${SHEET_ID}/export?format=csv&gid=0`;
 
-        let products = [];
-        let cart = [];
-        let currentCategory = 'all';
+        let catalogProducts = [];
+        let shoppingCart = [];
+        let activeFilter = 'all';
 
-        async function fetchProductsFromSheets() {
+        async function initStore() {
             try {
-                const res = await fetch(CSV_URL);
-                const data = await res.text();
+                const response = await fetch(CSV_URL);
+                const csvData = await response.text();
                 
-                const rows = data.split('\n').map(row => {
-                    return row.split(',').map(val => val.replace(/^"|"$/g, '').trim());
+                const rows = csvData.split('\n').map(row => {
+                    return row.split(',').map(cell => cell.replace(/^"|"$/g, '').trim());
                 });
 
-                products = [];
+                catalogProducts = [];
                 
                 for (let i = 1; i < rows.length; i++) {
                     const r = rows[i];
@@ -226,8 +226,8 @@
                             mappedCategory = rawCat || 'leather';
                         }
 
-                        products.push({
-                            id: `p-${i}`,
+                        catalogProducts.push({
+                            id: `prod-${i}`,
                             title: r[0] || 'Artículo sin título',
                             category: mappedCategory,
                             partner: r[2] || 'The Vault',
@@ -241,40 +241,40 @@
                     }
                 }
 
-                renderProducts();
+                renderCatalog();
             } catch (err) {
                 console.error('Error al conectar:', err);
                 document.getElementById('product-grid').innerHTML = `
                     <div class="col-span-full py-24 text-center text-red-400 font-serif text-xs tracking-widest">
-                        Error al cargar el catálogo desde Google Sheets. Verifica los permisos de acceso.
+                        Error al cargar el catálogo. Verifica los permisos de acceso en Google Sheets.
                     </div>`;
             }
         }
 
-        function renderProducts() {
-            const grid = document.getElementById('product-grid');
+        function renderCatalog() {
+            const gridContainer = document.getElementById('product-grid');
 
-            const filtered = products.filter(p => {
-                if (currentCategory === 'all') return true;
-                if (currentCategory === 'clearance') return p.isClearance;
-                return p.category === currentCategory;
+            const filteredList = catalogProducts.filter(item => {
+                if (activeFilter === 'all') return true;
+                if (activeFilter === 'clearance') return item.isClearance;
+                return item.category === activeFilter;
             });
 
-            if (filtered.length === 0) {
-                grid.innerHTML = `<div class="col-span-full py-24 text-center text-gray-600 font-serif text-xs tracking-widest uppercase">No hay artículos disponibles en esta categoría.</div>`;
+            if (filteredList.length === 0) {
+                gridContainer.innerHTML = `<div class="col-span-full py-24 text-center text-gray-600 font-serif text-xs tracking-widest uppercase">No hay artículos disponibles en esta categoría.</div>`;
                 return;
             }
 
-            grid.innerHTML = filtered.map(p => {
-                const hasDiscount = p.priceDiscount > 0 && p.priceDiscount < p.priceNormal;
-                const finalPrice = hasDiscount ? p.priceDiscount : p.priceNormal;
-                const discountPercent = hasDiscount ? Math.round(((p.priceNormal - p.priceDiscount) / p.priceNormal) * 100) : 0;
+            gridContainer.innerHTML = filteredList.map(item => {
+                const hasDiscount = item.priceDiscount > 0 && item.priceDiscount < item.priceNormal;
+                const finalPrice = hasDiscount ? item.priceDiscount : item.priceNormal;
+                const discountPercent = hasDiscount ? Math.round(((item.priceNormal - item.priceDiscount) / item.priceNormal) * 100) : 0;
 
-                let imageHTML = '';
-                if (p.image) {
-                    imageHTML = `<img src="${p.image}" alt="${p.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">`;
+                let imageBlock = '';
+                if (item.image) {
+                    imageBlock = `<img src="${item.image}" alt="${item.title}" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700 opacity-90 group-hover:opacity-100">`;
                 } else {
-                    imageHTML = `
+                    imageBlock = `
                     <div class="w-full h-full flex flex-col items-center justify-center bg-vault-base p-6 text-center border border-vault-border/50">
                         <svg class="w-8 h-8 text-vault-gold/40 mb-3" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
                         <span class="text-[11px] font-serif text-gray-400 tracking-wider uppercase">Imagen no disponible</span>
@@ -285,16 +285,16 @@
                 return `
                 <div class="vault-card rounded-none overflow-hidden flex flex-col justify-between group">
                     <div class="relative aspect-[4/5] overflow-hidden bg-black/60">
-                        ${imageHTML}
+                        ${imageBlock}
                         
                         <div class="absolute top-4 left-4 flex flex-col gap-2 items-start">
                             <span class="px-3 py-1 bg-black/90 backdrop-blur-md border border-vault-gold/30 text-vault-gold text-[9px] font-serif tracking-[0.2em] uppercase">
-                                ${p.partner}
+                                ${item.partner}
                             </span>
                             <span class="px-2.5 py-1 bg-vault-surface/90 border border-vault-border text-gray-300 text-[9px] font-mono tracking-wider uppercase">
-                                ${p.condition}
+                                ${item.condition}
                             </span>
-                            ${p.isClearance ? `<span class="px-3 py-1 bg-vault-sale text-white text-[9px] font-bold tracking-[0.2em] uppercase shadow-lg">🔥 Liquidación</span>` : ''}
+                            ${item.isClearance ? `<span class="px-3 py-1 bg-vault-sale text-white text-[9px] font-bold tracking-[0.2em] uppercase shadow-lg">🔥 Liquidación</span>` : ''}
                         </div>
 
                         ${hasDiscount ? `<span class="absolute top-4 right-4 px-2.5 py-1 bg-vault-gold text-black text-[10px] font-bold tracking-widest">-${discountPercent}%</span>` : ''}
@@ -302,18 +302,18 @@
 
                     <div class="p-6 flex-1 flex flex-col justify-between bg-vault-card">
                         <div>
-                            <h3 class="text-base font-serif font-normal text-white tracking-wider group-hover:text-vault-gold transition-colors">${p.title}</h3>
-                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">${p.spec}</p>
+                            <h3 class="text-base font-serif font-normal text-white tracking-wider group-hover:text-vault-gold transition-colors">${item.title}</h3>
+                            <p class="text-xs text-gray-400 font-light mt-2 line-clamp-2 leading-relaxed">${item.spec}</p>
                         </div>
 
                         <div class="mt-6 pt-5 border-t border-vault-border flex items-end justify-between">
                             <div>
-                                ${hasDiscount ? `<span class="block text-[11px] text-gray-600 line-through">$${p.priceNormal.toLocaleString()} MXN</span>` : ''}
-                                <span class="text-lg font-serif font-semibold tracking-wider ${p.isClearance ? 'text-vault-sale' : 'text-vault-gold'}">
+                                ${hasDiscount ? `<span class="block text-[11px] text-gray-600 line-through">$${item.priceNormal.toLocaleString()} MXN</span>` : ''}
+                                <span class="text-lg font-serif font-semibold tracking-wider ${item.isClearance ? 'text-vault-sale' : 'text-vault-gold'}">
                                     $${finalPrice.toLocaleString()} MXN
                                 </span>
                             </div>
-                            <button type="button" onclick="addToCart('${p.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all cursor-pointer">
+                            <button type="button" onclick="addProductToCart('${item.id}')" class="px-4 py-2 bg-vault-surface hover:bg-vault-gold hover:text-black border border-vault-border hover:border-vault-gold text-xs font-serif uppercase tracking-widest text-gray-300 transition-all cursor-pointer">
                                 Adquirir
                             </button>
                         </div>
@@ -323,135 +323,144 @@
             }).join('');
         }
 
-        function setCategory(cat, btnElement) {
-            currentCategory = cat;
+        function filterCategory(categoryKey, btnElement) {
+            activeFilter = categoryKey;
             document.querySelectorAll('.cat-btn').forEach(btn => {
                 btn.classList.remove('bg-vault-gold', 'text-black', 'text-vault-sale', 'border-vault-sale');
                 btn.classList.add('bg-vault-surface', 'text-gray-400');
             });
             if (btnElement) {
                 btnElement.classList.remove('bg-vault-surface', 'text-gray-400');
-                if(cat === 'clearance') {
+                if(categoryKey === 'clearance') {
                     btnElement.classList.add('bg-vault-sale/20', 'text-vault-sale', 'border-vault-sale');
                 } else {
                     btnElement.classList.add('bg-vault-gold', 'text-black');
                 }
             }
-            renderProducts();
+            renderCatalog();
         }
 
-        function addToCart(id) {
-            const prod = products.find(p => p.id === id);
-            if (!prod) return;
-            const existing = cart.find(item => item.id === id);
-            if (existing) {
-                existing.qty++;
+        function addProductToCart(productId) {
+            const product = catalogProducts.find(p => p.id === productId);
+            if (!product) return;
+
+            const cartItem = shoppingCart.find(i => i.id === productId);
+            if (cartItem) {
+                cartItem.qty += 1;
             } else {
-                cart.push({ ...prod, qty: 1 });
+                shoppingCart.push({ ...product, qty: 1 });
             }
-            updateCartUI();
-            toggleCart(true);
+
+            refreshCartDisplay();
+            openCartDrawer();
         }
 
-        function updateCartUI() {
-            const count = cart.reduce((acc, i) => acc + i.qty, 0);
-            const badge = document.getElementById('cart-badge');
-            if(badge) {
-                badge.innerText = count;
-                badge.style.opacity = count > 0 ? '1' : '0';
+        function refreshCartDisplay() {
+            const totalUnits = shoppingCart.reduce((sum, item) => sum + item.qty, 0);
+            
+            const badgeEl = document.getElementById('cart-badge');
+            if(badgeEl) {
+                badgeEl.innerText = totalUnits;
+                badgeEl.style.opacity = totalUnits > 0 ? '1' : '0';
             }
+
             const countLabel = document.getElementById('cart-count');
             if(countLabel) {
-                countLabel.innerText = `${count} piezas seleccionadas`;
+                countLabel.innerText = `${totalUnits} piezas seleccionadas`;
             }
 
-            const container = document.getElementById('cart-items');
-            if(!container) return;
+            const itemsContainer = document.getElementById('cart-items');
+            if(!itemsContainer) return;
 
-            if (cart.length === 0) {
-                container.innerHTML = `<p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La mochila está vacía.</p>`;
+            if (shoppingCart.length === 0) {
+                itemsContainer.innerHTML = `<p class="text-center text-gray-600 font-serif text-xs tracking-widest py-12">La mochila está vacía.</p>`;
                 document.getElementById('cart-total').innerText = `$0 MXN`;
                 return;
             }
 
-            let total = 0;
-            container.innerHTML = cart.map(item => {
-                const price = (item.priceDiscount > 0 && item.priceDiscount < item.priceNormal) ? item.priceDiscount : item.priceNormal;
-                const subtotal = price * item.qty;
-                total += subtotal;
+            let grandTotal = 0;
+            itemsContainer.innerHTML = shoppingCart.map(item => {
+                const effectivePrice = (item.priceDiscount > 0 && item.priceDiscount < item.priceNormal) ? item.priceDiscount : item.priceNormal;
+                const lineTotal = effectivePrice * item.qty;
+                grandTotal += lineTotal;
 
                 return `
                 <div class="flex items-center justify-between bg-vault-base p-4 border border-vault-border">
                     <div class="flex-1 pr-3">
                         <h4 class="text-xs font-serif tracking-wider text-white">${item.title} <span class="text-[10px] text-vault-gold">(${item.condition})</span></h4>
-                        <span class="text-[11px] text-vault-gold font-mono">$${price.toLocaleString()} c/u (Sub: $${subtotal.toLocaleString()})</span>
+                        <span class="text-[11px] text-vault-gold font-mono">$${effectivePrice.toLocaleString()} c/u (Sub: $${lineTotal.toLocaleString()})</span>
                     </div>
                     <div class="flex items-center gap-3">
-                        <button type="button" onclick="changeQty('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">−</button>
+                        <button type="button" onclick="modifyQuantity('${item.id}', -1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">−</button>
                         <span class="text-xs font-mono font-bold text-white">${item.qty}</span>
-                        <button type="button" onclick="changeQty('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">+</button>
+                        <button type="button" onclick="modifyQuantity('${item.id}', 1)" class="w-6 h-6 bg-vault-surface text-gray-400 hover:text-white border border-vault-border text-xs cursor-pointer">+</button>
                     </div>
                 </div>`;
             }).join('');
 
-            document.getElementById('cart-total').innerText = `$${total.toLocaleString()} MXN`;
+            document.getElementById('cart-total').innerText = `$${grandTotal.toLocaleString()} MXN`;
         }
 
-        function changeQty(id, delta) {
-            const item = cart.find(i => i.id === id);
-            if (item) {
-                item.qty += delta;
-                if (item.qty <= 0) {
-                    cart = cart.filter(i => i.id !== id);
+        function modifyQuantity(productId, changeAmount) {
+            const cartItem = shoppingCart.find(i => i.id === productId);
+            if (cartItem) {
+                cartItem.qty += changeAmount;
+                if (cartItem.qty <= 0) {
+                    shoppingCart = shoppingCart.filter(i => i.id !== productId);
                 }
             }
-            updateCartUI();
+            refreshCartDisplay();
         }
 
-        function toggleCart(open) {
+        function openCartDrawer() {
             const drawer = document.getElementById('cart-drawer');
-            if(!drawer) return;
-            if (open) {
+            if(drawer) {
                 drawer.classList.remove('opacity-0', 'pointer-events-none');
-            } else {
+            }
+        }
+
+        function closeCartDrawer() {
+            const drawer = document.getElementById('cart-drawer');
+            if(drawer) {
                 drawer.classList.add('opacity-0', 'pointer-events-none');
             }
         }
 
         function sendWhatsAppOrder() {
-            if (cart.length === 0) return alert('Seleccione al menos una pieza de la colección.');
+            if (shoppingCart.length === 0) return alert('Seleccione al menos una pieza de la colección.');
+            
             const nameInput = document.getElementById('cust-name');
             const cityInput = document.getElementById('cust-city');
             const specInput = document.getElementById('cust-spec');
 
-            const name = nameInput ? nameInput.value.trim() : '';
-            const city = cityInput ? cityInput.value.trim() : '';
-            const spec = specInput ? specInput.value.trim() : '';
+            const clientName = nameInput ? nameInput.value.trim() : '';
+            const clientCity = cityInput ? cityInput.value.trim() : '';
+            const clientSpec = specInput ? specInput.value.trim() : '';
 
-            if (!name || !city) return alert('Por favor ingrese su Nombre y Ciudad de destino.');
+            if (!clientName || !clientCity) return alert('Por favor ingrese su Nombre y Ciudad de destino.');
 
-            let total = 0;
-            let itemsText = cart.map(i => {
-                const price = (i.priceDiscount > 0 && i.priceDiscount < i.priceNormal) ? i.priceDiscount : i.priceNormal;
-                const itemSubtotal = price * i.qty;
-                total += itemSubtotal;
-                return `• ${i.qty}x ${i.title} [Condición: ${i.condition}] (${i.partner}) — $${price.toLocaleString()} c/u (Subtotal: $${itemSubtotal.toLocaleString()} MXN)`;
+            let accumulatedTotal = 0;
+            let orderSummaryText = shoppingCart.map(item => {
+                const priceToUse = (item.priceDiscount > 0 && item.priceDiscount < item.priceNormal) ? item.priceDiscount : item.priceNormal;
+                const itemSubtotal = priceToUse * item.qty;
+                accumulatedTotal += itemSubtotal;
+                return `• ${item.qty}x ${item.title} [Condición: ${item.condition}] (${item.partner}) — $${priceToUse.toLocaleString()} c/u (Subtotal: $${itemSubtotal.toLocaleString()} MXN)`;
             }).join('\n');
 
-            let msg = `*SOLICITUD DE PEDIDO — THE VAULT MX*\n\n` +
-                      `*PIEZAS SOLICITADAS:*\n${itemsText}\n\n` +
-                      `*INVERSIÓN TOTAL:* $${total.toLocaleString()} MXN\n\n` +
-                      `*DATOS DEL CLIENTE:*\n` +
-                      `• Nombre: ${name}\n` +
-                      `• Destino: ${city}\n` +
-                      (spec ? `• Especificaciones: ${spec}\n` : '') +
-                      `\nQuedo atento a la confirmación de Saúl Falcón para coordinar la transferencia SPEI y el envío.`;
+            let finalWhatsAppMessage = `*SOLICITUD DE PEDIDO — THE VAULT MX*\n\n` +
+                                       `*PIEZAS SOLICITADAS:*\n${orderSummaryText}\n\n` +
+                                       `*INVERSIÓN TOTAL:* $${accumulatedTotal.toLocaleString()} MXN\n\n` +
+                                       `*DATOS DEL CLIENTE:*\n` +
+                                       `• Nombre: ${clientName}\n` +
+                                       `• Destino: ${clientCity}\n` +
+                                       (clientSpec ? `• Especificaciones: ${clientSpec}\n` : '') +
+                                       `\nQuedo atento a la confirmación de Saúl Falcón para coordinar la transferencia SPEI y el envío.`;
 
-            const phone = "524776717098";
-            window.open(`https://wa.me/${phone}?text=${encodeURIComponent(msg)}`, '_blank');
+            const destinationPhone = "524776717098";
+            window.open(`https://wa.me/${destinationPhone}?text=${encodeURIComponent(finalWhatsAppMessage)}`, '_blank');
         }
 
-        window.onload = fetchProductsFromSheets;
+        window.onload = initStore;
     </script>
 </body>
 </html>
